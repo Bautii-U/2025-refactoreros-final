@@ -834,7 +834,7 @@ GameTest >> testC05WhenAShipPlaysAPermanentCardOutOfItsTurnThenItFails [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                AccelerationCard withoutOwner.
+		                AccelerationCard withoutOwner .
 		                AccelerationCard withoutOwner.
 		                AccelerationCard withoutOwner.
 		                AccelerationCard withoutOwner.
@@ -871,12 +871,12 @@ GameTest >> testC06WhenAShipPlaysSpeedCardAndItIncrementItsDiceRollThenValid [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner } asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
@@ -884,7 +884,7 @@ GameTest >> testC06WhenAShipPlaysSpeedCardAndItIncrementItsDiceRollThenValid [
 		         drawingFrom: aDeckOfCards.
 
 	aGame play.
-	aGame throw: 'Speed Card' from: 'Player 2' to: (Target ship: 'Player 2').
+	aGame throwPermanently: 'Speed Card' from: 'Player 2' to: 'Player 2'.
 	aGame play.
 	aGame play.
 
@@ -910,8 +910,8 @@ GameTest >> testC07WhenACancellationCardIsPlayedAndThePermanentCardIsDeactivated
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
 		                CancellationCard withoutOwner.
 		                CancellationCard withoutOwner } asOrderedCollection.
 
@@ -921,8 +921,11 @@ GameTest >> testC07WhenACancellationCardIsPlayedAndThePermanentCardIsDeactivated
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Speed Card' from: 'Player 1' to:(Target ship: 'Player 1').
-	aGame throw: 'Cancellation Card' from: 'Player 2' to: (Target ship: 'Player 1' whoPlayed: 'Speed Card').
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
+	aGame
+		throw: 'Cancellation Card'
+		from: 'Player 2'
+		to: (Target ship: 'Player 1' whoPlayed: 'Speed Card').
 	aGame play.
 	aGame play.
 
@@ -966,7 +969,8 @@ GameTest >> testC08WhenACancellationCardIsPlayedAndTheTargetCardIsNotActiveThenI
 				from: 'Player 2'
 				to: (Target ship: 'Player 1' whoPlayed: 'Speed Card') ]
 		raise: Error
-		withMessageText: 'Targeted Card is not within active permanent cards'
+		withMessageText:
+		'Targeted Card is not within active permanent cards'
 ]
 
 { #category : 'tests' }
@@ -1006,7 +1010,8 @@ GameTest >> testC09WhenACancellationCardTargetsANonPermanentCardThenItFails [
 				from: 'Player 2'
 				to: (Target ship: 'Player 1' whoPlayed: 'Cancellation Card') ]
 		raise: Error
-		withMessageText: 'Targeted Card is not within active permanent cards'
+		withMessageText:
+		'Targeted Card is not within active permanent cards'
 ]
 
 { #category : 'tests' }
@@ -1079,41 +1084,44 @@ GameTest >> testC11WhenARedoCardIsPlayedWithoutACardPlayedPreviouslyThenItFails 
 { #category : 'tests' }
 GameTest >> testC12WhenARedoCardIsPlayedByAShipAndItActivatesForAnotherPlayerThenIsValid [
 
-    | aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
-    aBoardSize := 10.
-    dice := OrderedCollection new.
-    dice add: (LoadedDie withSetNumbers: #( 3 5 2 )).
-    squareGenerator := SquareGenerator withOnlyEmptySquares.
-    aBoard := Board
-                  populatedBy: squareGenerator
-                  anAmountOf: aBoardSize
-                  withTotalDistanceOf: (Parsec amount: 50)
-                  toBePlayedOnRolling: dice.
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 3 5 2 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
 
-    shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
-    aDeckOfCards := {
-                        SpeedCard withoutOwner.
-                        SpeedCard withoutOwner.
-                        RedoCard withoutOwner.
-                        RedoCard withoutOwner.
-                        CancellationCard withoutOwner.
-                        CancellationCard withoutOwner } asOrderedCollection.
-    aGame := Game
-                 gamePlayedBy: shipNames
-                 on: aBoard
-                 toPlayFor: 2
-                 drawingFrom: aDeckOfCards.
+	aDeckOfCards := {
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                RedoCard withoutOwner.
+		                RedoCard withoutOwner.
+		                CancellationCard withoutOwner.
+		                CancellationCard withoutOwner } asOrderedCollection.
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
 
-    aGame throw: 'Speed Card' from: 'Player 1' to: (Target ship: 'Player 1').
-    aGame play.
-    aGame throw: 'Redo Card' from: 'Player 2' to: (Target ship: 'Player 3').
-    aGame play.
-    aGame play.
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
+	aGame play.
+	aGame
+		throw: 'Redo Card'
+		from: 'Player 2'
+		to: (Target ship: 'Player 3').
+	aGame play.
+	aGame play.
 
-    self assert: (aGame positionOf: 'Player 1') equals: 5.
-    self assert: (aGame positionOf: 'Player 2') equals: 6.
-    self assert: (aGame positionOf: 'Player 3') equals: 4
+	self assert: (aGame positionOf: 'Player 1') equals: 5.
+	self assert: (aGame positionOf: 'Player 2') equals: 6.
+	self assert: (aGame positionOf: 'Player 3') equals: 4
 ]
 
 { #category : 'tests' }
@@ -1145,10 +1153,7 @@ GameTest >> testC13WhenRedoCardIsPlayedByAShipAfterAPermanentCardAndItsNotTheTur
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame
-		throw: 'Speed Card'
-		from: 'Player 1'
-		to: (Target ship: 'Player 1').
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
 	aGame play.
 	aGame play.
 
@@ -1192,14 +1197,8 @@ GameTest >> testC14WhenARedoCardIsPlayedAfterAnInstantaneousCardAndHasTheSameEff
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame
-		throw: 'Speed Card'
-		from: 'Player 1'
-		to: (Target ship: 'Player 1').
-	aGame
-		throw: 'Speed Card'
-		from: 'Player 1'
-		to: (Target ship: 'Player 1').
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
 	aGame play.
 	aGame
 		throw: 'Cancellation Card'
@@ -1246,10 +1245,10 @@ GameTest >> testC15WhenARedoIsPlayedAfterAnotherRedoAndHasTheSameEffectThenValid
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Speed Card' from: 'Player 1' to: (Target ship: 'Player 1').
-	aGame throw: 'Speed Card' from: 'Player 1' to: (Target ship: 'Player 1').
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
+	aGame throwPermanently: 'Speed Card' from: 'Player 1' to: 'Player 1'.
 	aGame play.
-	aGame throw: 'Speed Card' from: 'Player 2' to: (Target ship: 'Player 1').
+	aGame throwPermanently: 'Speed Card' from: 'Player 2' to: 'Player 1'.
 	aGame throw: 'Cancellation Card' from: 'Player 2' to: (Target ship: 'Player 1' whoPlayed: 'Speed Card').
 	aGame play.
 	aGame throw: 'Redo Card' from: 'Player 3' to: (Target ship: 'Player 1' whoPlayed: 'Speed Card').
@@ -1454,24 +1453,28 @@ GameTest >> testC20WhenAMercenaryCardIsPlayedAndTheMercenaryHelpsTheShipInBattle
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1'  to: (Target ship: 'Player 3').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
 	aGame play.
 	aGame play.
 	aGame play.
 	aGame play.
-	
+
 	self assert: (aGame positionOf: 'Player 1') equals: 4.
 	self assert: (aGame positionOf: 'Player 2') equals: 1
 ]
@@ -1493,10 +1496,11 @@ GameTest >> testC21WhenAShipLandsOnTheSameSquareAsItsMercenaryAndDontBattleThenV
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
@@ -1504,9 +1508,12 @@ GameTest >> testC21WhenAShipLandsOnTheSameSquareAsItsMercenaryAndDontBattleThenV
 		         drawingFrom: aDeckOfCards.
 
 	aGame play.
-	aGame throw: 'Mercenary Card' from: 'Player 2' to: (Target ship: 'Player 1').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 2'
+		to: 'Player 1'.
 	aGame play.
-	
+
 	self assert: (aGame positionOf: 'Player 1') equals: 3.
 	self assert: (aGame positionOf: 'Player 2') equals: 3
 ]
@@ -1528,17 +1535,17 @@ GameTest >> testC22WhenAMercenaryLandsOnTheSameSquareAsItsHirererAndDontBattleTh
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner .
+		                PermanentCard speedWithoutOwner .
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner } asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 		
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 2').
+	aGame throwPermanently: 'Mercenary Card' from: 'Player 1' to: 'Player 2'.
 	aGame play.
 	aGame play.
 	
@@ -1560,29 +1567,32 @@ GameTest >> testC23WhenAMercenaryBattlesAndTheHirererDoesNotHelpThenValid [
 		          withTotalDistanceOf: (Parsec amount: 50)
 		          toBePlayedOnRolling: dice.
 
-	shipNames := #( 'Player 1' 'Player 2' 'Player 3').
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-							 SpeedCard withoutOwner.
-		                SpeedCard withoutOwner. } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 2').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 2'.
 	aGame play.
 	aGame play.
 	aGame play.
-	
-	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
-	self assert: (aGame shieldfOf: 'Player 2') equals: 2.
 
+	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 2
 ]
 
 { #category : 'tests' }
@@ -1602,22 +1612,29 @@ GameTest >> testC24WhenAShipHiresMoreThanOneMercenaryAndTheyHelpInBattleThenVali
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 2').
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 3').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 2'.
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
 	aGame play.
 	aGame play.
 	aGame play.
@@ -1643,22 +1660,29 @@ GameTest >> testC25WhenAShipWithMercenariesLosesABattleAndAllBreakAShieldThenVal
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 2').
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 3').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 2'.
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
 	aGame play.
 	aGame play.
 	aGame play.
@@ -1686,23 +1710,27 @@ GameTest >> testC26WhenAShipHiresAMercenaryAndItHasAlreadyBeenHiredThenItFails [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 3').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
 	aGame play.
 
 	self
-		should: [ aGame throw: 'Mercenary Card' from: 'Player 2' to: (Target ship: 'Player 3') ]
+		should: [ aGame throwPermanently: 'Mercenary Card' from: 'Player 2' to: 'Player 3' ]
 		raise: Error
 		withMessageText: 'Ship has already been hired as mercenary'
 ]
@@ -1757,25 +1785,29 @@ GameTest >> testC28WhenShipsBattleAndAPlayedAccelerationCardIncreasesTheDiceThro
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                AccelerationCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard accelerationWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1'  to: (Target ship: 'Player 3').
-	aGame throw: 'Acceleration Card' from: 'Player 1'. 
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
+	aGame throwPermanently: 'Acceleration Card' from: 'Player 1'.
 	aGame play.
 	aGame play.
 	aGame play.
 	aGame play.
-	
+
 	self assert: (aGame positionOf: 'Player 1') equals: 5.
 	self assert: (aGame positionOf: 'Player 2') equals: 1
 ]
@@ -1808,7 +1840,7 @@ GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardAndTheLastSquareGetsRetr
 		                RepeatCard withoutOwner.
 		                RepeatCard withoutOwner.
 		                RedoCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard speedWithoutOwner } asOrderedCollection.
 
 	aGame := Game
 		         gamePlayedBy: shipNames
@@ -1847,8 +1879,8 @@ GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactiva
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                AccelerationCard withoutOwner.
-		                SpeedCard withoutOwner.
+		                PermanentCard accelerationWithoutOwner .
+		                PermanentCard speedWithoutOwner .
 		                CancellationCard withoutOwner.
 		                CancellationCard withoutOwner } asOrderedCollection.
 
@@ -1858,7 +1890,7 @@ GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactiva
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Acceleration Card' from: 'Player 1'.
+	aGame throwPermanently: 'Acceleration Card' from: 'Player 1'.
 	aGame throw: 'Cancellation Card' from: 'Player 2' to: (Target ship: 'Player 1' whoPlayed: 'Acceleration Card').
 	aGame play.
 	aGame play.
@@ -1883,8 +1915,8 @@ GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryAndTheMercenaryNoLo
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
-		                SpeedCard withoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner .
 		                CancellationCard withoutOwner.
 		                CancellationCard withoutOwner } asOrderedCollection.
 
@@ -1894,7 +1926,7 @@ GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryAndTheMercenaryNoLo
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship:'Player 2').
+	aGame throwPermanently: 'Mercenary Card' from: 'Player 1' to: 'Player 2'.
 	aGame throw: 'Cancellation Card' from: 'Player 2' to: (Target ship: 'Player 1' whoPlayed: 'Mercenary Card').
 	aGame play.
 	aGame play.
@@ -1919,26 +1951,154 @@ GameTest >> testC32WhenAShipUsesRedoCardAfterAMercenaryCardAndTwoShipsHelpInBatt
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                MercenaryCard withoutOwner.
+		                PermanentCard mercenaryWithoutOwner.
 		                RedoCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner.
-		                SpeedCard withoutOwner } asOrderedCollection.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
 	aGame := Game
 		         gamePlayedBy: shipNames
 		         on: aBoard
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Mercenary Card' from: 'Player 1' to: (Target ship: 'Player 2').
-	aGame throw: 'Redo Card' from: 'Player 1' to: (Target ship: 'Player 3').
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 2'.
+	aGame
+		throw: 'Redo Card'
+		from: 'Player 1'
+		to: (Target ship: 'Player 3').
 	aGame play.
 	aGame play.
 	aGame play.
 	aGame play.
 
 	self assert: (aGame shieldfOf: 'Player 4') equals: 2
+]
+
+{ #category : 'tests' }
+GameTest >> testC33 [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 3 5 7 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
+
+	aDeckOfCards := {
+		                PermanentCard speedWithoutOwner .
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner } asOrderedCollection.
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame play.
+	aGame throwPermanently: 'Speed Card' from: 'Player 2' to: 'Player 2'.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 4.
+	self assert: (aGame positionOf: 'Player 2') equals: 7.
+	self assert: (aGame positionOf: 'Player 3') equals: 8
+]
+
+{ #category : 'tests' }
+GameTest >> testC34 [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 3 5 7 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
+
+	aDeckOfCards := {
+		                PermanentCard accelerationWithoutOwner .
+		                PermanentCard accelerationWithoutOwner.
+		                PermanentCard accelerationWithoutOwner.
+		                PermanentCard accelerationWithoutOwner.
+		                PermanentCard accelerationWithoutOwner.
+		                PermanentCard accelerationWithoutOwner } asOrderedCollection.
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame play.
+	aGame throwPermanently: 'Acceleration Card' from: 'Player 2' to: 'Player 3'.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 4.
+	self assert: (aGame positionOf: 'Player 2') equals: 7.
+	self assert: (aGame positionOf: 'Player 3') equals: 9
+]
+
+{ #category : 'tests' }
+GameTest >> testC35 [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 2 3 10 1 3 3 5 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
+
+	aDeckOfCards := {
+		                PermanentCard mercenaryWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner.
+		                PermanentCard speedWithoutOwner }
+		                asOrderedCollection.
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame
+		throwPermanently: 'Mercenary Card'
+		from: 'Player 1'
+		to: 'Player 3'.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 4.
+	self assert: (aGame positionOf: 'Player 2') equals: 1
 ]

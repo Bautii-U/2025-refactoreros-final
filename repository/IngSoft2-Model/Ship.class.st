@@ -134,6 +134,22 @@ Ship >> shields [
 ]
 
 { #category : 'actions' }
+Ship >> throw2: aCardName whenTurnOf: aShip to: aTargetShip [
+	" Aca todavia se esta asumiendo que la carta es permanente, no borrar el metodo anterior "
+	| card |
+	(cardsInHand anySatisfy: [ :aCard | aCard hasSameTypeAs: aCardName ])
+		ifFalse: [ Error signal: 'The ship does not have this card' ].
+	card := cardsInHand detect: [ :aCard | aCard hasSameTypeAs: aCardName ].
+
+	(self playerName ~= aShip playerName) ifTrue: [
+		Error signal:
+			'The ship is trying to use a permanent card out of its turn' ].
+
+	cardsInHand remove: card.
+	^ card activateFor: self targetedTo: aTargetShip
+]
+
+{ #category : 'actions' }
 Ship >> throw: aCardName whenTurnOf: aShip [
 
 	| card |

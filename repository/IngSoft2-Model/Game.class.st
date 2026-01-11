@@ -280,18 +280,19 @@ Game >> throw: aCardName from: aShipName [
 ]
 
 { #category : 'actions' }
-Game >> throw: aCardName from: aShipName to: aTarget [
+Game >> throwPermanently: aPermanentCardName from: aShipName to: aTargetShipName [
+	"Temporarily only for permanent cards"
 
 	| queriedShip card queriedTargetShip |
 	queriedShip := self searchShipByName: aShipName.
-	queriedTargetShip := self searchShipByName: aTarget shipName.
+	queriedTargetShip := self searchShipByName: aTargetShipName.
 
 	card := queriedShip
-		        throw: aCardName
+		        throw2: aPermanentCardName
 		        whenTurnOf: (ships at: 1)
 		        to: queriedTargetShip.
-
-	card playIn: self alongWith: activeCards targetedAt: aTarget
+	activeCards add: card.
+	lastCardPlayed := card
 ]
 
 { #category : 'actions' }
