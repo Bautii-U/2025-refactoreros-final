@@ -85,6 +85,12 @@ Ship >> initializeFor: aPlayerName startingAt: aPostion shieldedWith: aNumberOfS
 
 ]
 
+{ #category : 'testing' }
+Ship >> isAValidTargetShip [
+
+	^ true
+]
+
 { #category : 'accessing' }
 Ship >> isAtTheSameSquareAs: anotherShip [
 
@@ -134,51 +140,17 @@ Ship >> shields [
 ]
 
 { #category : 'actions' }
-Ship >> throw2: aCardName whenTurnOf: aShip to: aTargetShip [
-	" Aca todavia se esta asumiendo que la carta es permanente, no borrar el metodo anterior "
+Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip whoPlayed: aTargetCardName [
+
 	| card |
 	(cardsInHand anySatisfy: [ :aCard | aCard hasSameTypeAs: aCardName ])
 		ifFalse: [ Error signal: 'The ship does not have this card' ].
-	card := cardsInHand detect: [ :aCard | aCard hasSameTypeAs: aCardName ].
+	card := cardsInHand detect: [ :aCard |
+		        aCard hasSameTypeAs: aCardName ].
 
-	(self playerName ~= aShip playerName) ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ].
-
-	cardsInHand remove: card.
-	^ card activateFor: self targetedTo: aTargetShip
-]
-
-{ #category : 'actions' }
-Ship >> throw: aCardName whenTurnOf: aShip [
-
-	| card |
-	(cardsInHand anySatisfy: [ :aCard | aCard name = aCardName ])
-		ifFalse: [ Error signal: 'The ship does not have this card' ].
-	card := cardsInHand detect: [ :aCard | aCard name = aCardName ].
-
-	(card isPermanent and: self playerName ~= aShip playerName) ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ].
-
+	card checkForTurnRequierementwhen: self playsACardDuringTheTurnOf: aShip.
+	card checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName.
 	cardsInHand remove: card.
 
-	^ card class ownedBy: self
-]
-
-{ #category : 'actions' }
-Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip [
-
-	| card |
-	(cardsInHand anySatisfy: [ :aCard | aCard name = aCardName ])
-		ifFalse: [ Error signal: 'The ship does not have this card' ].
-	card := cardsInHand detect: [ :aCard | aCard name = aCardName ].
-
-	(card isPermanent and: self playerName ~= aShip playerName) ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ].
-
-	cardsInHand remove: card.
-
-	^ card class ownedBy: self targetedTo: aTargetShip
+	^ card playedBy: self targetedTo: aTargetShip whoPlayed: aTargetCardName
 ]

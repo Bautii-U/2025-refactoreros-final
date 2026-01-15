@@ -10,7 +10,6 @@ Class {
 		'ships',
 		'board',
 		'activeCards',
-		'lastCardPlayed',
 		'nextSquare'
 	],
 	#category : 'IngSoft2-Model-Game',
@@ -106,39 +105,38 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal drawingFrom
 ]
 
 { #category : 'actions' }
-Game >> applyCancellationTo: aTarget [
+Game >> applyCancellationTo: aTargetShip whoPlayed: aTargetCardName [
 
 	| cardToBeCancelled |
 	(activeCards anySatisfy: [ :aCard |
-		 aCard name = aTarget cardName and:
-			 aCard ownerName = aTarget shipName ]) ifFalse: [
+		 aCard is: aTargetCardName ownedBy: aTargetShip ]) ifFalse: [
 		Error signal: 'Targeted Card is not within active permanent cards' ].
 
 	cardToBeCancelled := activeCards detect: [ :aCard |
-		                     aCard name = aTarget cardName and:
-			                     aCard ownerName = aTarget shipName ].
+		                     aCard is: aTargetCardName ownedBy: aTargetShip ].
 	activeCards remove: cardToBeCancelled
 ]
 
 { #category : 'actions' }
-Game >> applyRedoTo: aTarget from: aShip [
+Game >> applyRedoTo: aTargetShip from: aShip whoPlayed: aCard [
 
-	lastCardPlayed checkIfPresent.
+	| newCard |
+	activeCards ifEmpty: [
+		Error signal: 'No card has been played yet' ].
 
-
-	aShip drawCard: lastCardPlayed class withoutOwner.
-
-	aTarget shipName
-		ifEmpty: [ self throw: lastCardPlayed name from: aShip playerName ]
-		ifNotEmpty: [
-		self throw: lastCardPlayed name from: aShip playerName to: aTarget ]
+	newCard := (activeCards at: 1) playedBy: aShip targetedTo: aTargetShip whoPlayed: aCard.
+	
+	newCard checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: (ships at: 1).
+	newCard applyOnPlayed: self to: aTargetShip.
+	activeCards addFirst: newCard.
+	 
 ]
 
 { #category : 'actions' }
 Game >> applyRepeatTo: aTarget [
 
 	| targetedShip |
-	targetedShip := self searchShipByName: aTarget shipName.
+	targetedShip := self searchShipByName: aTarget playerName .
 
 	shipManager landShip: targetedShip atSquare: nextSquare on: board
 ]
@@ -159,6 +157,14 @@ Game >> checkForActiveGame [
 	^ true
 ]
 
+{ #category : 'as yet unclassified' }
+Game >> checkIf: aShip canHireAsMercenary: anotherShip [
+		| activeMercenaryCards |
+	activeMercenaryCards := activeCards select: [ :aCard | aCard hasSameTypeAs: 'Mercenary Card' ]. 
+	
+	(activeMercenaryCards anySatisfy: [ :aCard | aCard hasTarget: anotherShip ]) ifTrue: [ Error signal: 'Ship has already been hired as mercenary' ].
+]
+
 { #category : 'actions' }
 Game >> checkIfAllowedToPlay: aShip [
 
@@ -175,7 +181,7 @@ Game >> initializeWith: aSetOfships on: aBoard toPlayFor: aNumberOfLaps [
 	shipManager := ShipManager withShips: ships andActiveCards: activeCards.
 	board := aBoard.	
 	nextSquare := EmptySquare new.
-	lastCardPlayed := NullCard new.
+
 ]
 
 { #category : 'accessing' }
@@ -267,38 +273,40 @@ Game >> skip [
 
 { #category : 'actions' }
 Game >> throw: aCardName from: aShipName [
-
 	| queriedShip card |
 	queriedShip := self searchShipByName: aShipName.
 
-	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1).
-
-	card
-		playIn: self
-		alongWith: activeCards
-		targetedAt: (Target ship: '')
+	
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: (NullShip new) whoPlayed: ''.
+	
+	card applyOnPlayed: self to: ''.
+	activeCards addFirst: card.
 ]
 
 { #category : 'actions' }
-Game >> throwPermanently: aPermanentCardName from: aShipName to: aTargetShipName [
-	"Temporarily only for permanent cards"
+Game >> throw: aCardName from: aShipName to: aTargetShipName [
 
 	| queriedShip card queriedTargetShip |
 	queriedShip := self searchShipByName: aShipName.
 	queriedTargetShip := self searchShipByName: aTargetShipName.
-
-	card := queriedShip
-		        throw2: aPermanentCardName
-		        whenTurnOf: (ships at: 1)
-		        to: queriedTargetShip.
-	activeCards add: card.
-	lastCardPlayed := card
+	
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: queriedTargetShip whoPlayed: ''.
+	
+	card applyOnPlayed: self to: queriedTargetShip. 
+	activeCards addFirst: card.
 ]
 
 { #category : 'actions' }
-Game >> updateLastPlayedCard: aCard [
+Game >> throw: aCardName from: aShipName to: aTargetShipName whoPlayed: aTargetCardName [
 
-	lastCardPlayed := aCard
+	| queriedShip card queriedTargetShip |
+	queriedShip := self searchShipByName: aShipName.
+	queriedTargetShip := self searchShipByName: aTargetShipName.
+	
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: queriedTargetShip whoPlayed: aTargetCardName.
+	
+	card applyOnPlayed: self to: queriedTargetShip.
+	activeCards addFirst: card.
 ]
 
 { #category : 'accessing' }
