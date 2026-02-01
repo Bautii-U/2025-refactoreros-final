@@ -13,7 +13,7 @@ Class {
 	#tag : 'Card-Permanent'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 MercenaryCard class >> ownedBy: aShip targetedTo: aTargetShip [
 
 	^ self new initializeOwnedBy: aShip targetedTo: aTargetShip

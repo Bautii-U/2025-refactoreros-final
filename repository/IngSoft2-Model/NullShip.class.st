@@ -8,3 +8,9 @@ Class {
 	#package : 'IngSoft2-Model',
 	#tag : 'Game'
 }
+
+{ #category : 'testing' }
+NullShip >> isAValidTargetShip [
+
+	^ false
+]
