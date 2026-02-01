@@ -206,7 +206,7 @@ Game >> play [
 	self checkForActiveGame.
 	aShip := ships addLast: ships removeFirst.
 	self checkIfAllowedToPlay: aShip.
-	diceOutcome := board rollDice.
+	diceOutcome := board rollDiceFor: NullShip new with: OrderedCollection new.
 	extraPointsForThrow := 0.
 	activeCards do: [ :aCard |
 		extraPointsForThrow := extraPointsForThrow
