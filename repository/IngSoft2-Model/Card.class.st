@@ -18,13 +18,13 @@ Card class >> accelerationWithoutOwner [
 		  causing: (AccelerationEffect ofValue: 1)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 Card class >> cancellationWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
 		  causing:
-		  (CancellationEffect targetTo: NullShip new whoPlayed: NullCard new)
+		  (CancellationEffect targetTo: NullShip new whoPlayed: '')
 ]
 
 { #category : 'instance creation' }
@@ -49,7 +49,7 @@ Card class >> redoWithoutOwner [
 		  causing: (RedoEffect targetedTo: NullShip new)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 Card class >> repeatWithoutOwner [
 
 	^ self new
@@ -126,7 +126,5 @@ Card >> is: aCardName ownedBy: aShip [
 { #category : 'actions' }
 Card >> playedBy: aShip targetedTo: aTargetShip whoPlayed: aTargetCardName [
 
-	^ self class
-		  ownedBy: aShip
-		  causing: (effect targetTo: aTargetShip whoPlayed: aTargetCardName)
+	^ self class ownedBy: aShip causing: (effect targetTo: aTargetShip whoPlayed: aTargetCardName)
 ]

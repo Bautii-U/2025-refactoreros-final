@@ -273,10 +273,10 @@ Game >> skip [
 
 { #category : 'actions' }
 Game >> throw: aCardName from: aShipName [
+
 	| queriedShip card |
 	queriedShip := self searchShipByName: aShipName.
 
-	
 	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: (NullShip new) whoPlayed: ''.
 	
 	card applyOnPlayed: self to: ''.

@@ -10,7 +10,7 @@ Class {
 	#tag : 'CardEffect'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 RedoEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 	^ self new intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName
 ]
