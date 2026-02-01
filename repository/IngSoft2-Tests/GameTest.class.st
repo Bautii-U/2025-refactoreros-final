@@ -1831,7 +1831,7 @@ GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardAndTheLastSquareGetsRetr
 ]
 
 { #category : 'tests' }
-GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactivatedThenTheTargetedShipMovesNormally [
+GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactivatedThenValid [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
