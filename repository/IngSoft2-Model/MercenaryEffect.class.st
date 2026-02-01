@@ -34,14 +34,14 @@ MercenaryEffect >> applyThrowEffectFor: aShip [
 	
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 MercenaryEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	aTargetShip isAValidTargetShip ifFalse: [
 		Error signal: 'Mercenary Card requiers a target ship.' ].
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 MercenaryEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
@@ -67,12 +67,14 @@ MercenaryEffect >> isCalled: aName [
 	^ 'Mercenary Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
-MercenaryEffect >> targetTo: aShip [ 
-	^ self class targetedTo: aShip 
+{ #category : 'actions' }
+MercenaryEffect >> targetTo: aShip [
+
+	^ self class targetedTo: aShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 MercenaryEffect >> targetTo: aShip whoPlayed: aTargetCardName [
-	^ self class targetedTo: aShip 
+
+	^ self class targetedTo: aShip
 ]

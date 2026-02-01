@@ -157,7 +157,7 @@ Game >> checkForActiveGame [
 	^ true
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 Game >> checkIf: aShip canHireAsMercenary: anotherShip [
 		| activeMercenaryCards |
 	activeMercenaryCards := activeCards select: [ :aCard | aCard hasSameTypeAs: 'Mercenary Card' ]. 

@@ -82,7 +82,7 @@ Card >> applyThrowEffectFor: aShip [
 	^ (effect applyThrowEffectFor: aShip)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 Card >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	effect
@@ -90,7 +90,7 @@ Card >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 		whoPlayed: aTargetCardName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 Card >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	^ effect
@@ -123,7 +123,7 @@ Card >> is: aCardName ownedBy: aShip [
 	^ aShip = owner and: (effect isCalled: aCardName)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 Card >> playedBy: aShip targetedTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class

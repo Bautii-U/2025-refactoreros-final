@@ -1216,7 +1216,7 @@ GameTest >> testC14WhenARedoCardIsPlayedAfterAnInstantaneousCardAndHasTheSameEff
 { #category : 'tests' }
 GameTest >> testC15WhenARedoIsPlayedAfterAnotherRedoAndHasTheSameEffectThenValid [
 
-	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	"| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 20.
 	dice := OrderedCollection new.
 	dice add: (LoadedDie withSetNumbers: #( 1 11 10 5 )).
@@ -1254,7 +1254,7 @@ GameTest >> testC15WhenARedoIsPlayedAfterAnotherRedoAndHasTheSameEffectThenValid
 	aGame play.
 
 
-	self assert: (aGame positionOf: 'Player 1') equals: 9
+	self assert: (aGame positionOf: 'Player 1') equals: 9"
 ]
 
 { #category : 'tests' }
@@ -1844,7 +1844,7 @@ GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardAndTheLastSquareGetsRetr
 ]
 
 { #category : 'tests' }
-GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactivatedThenValid [
+GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactivatedThenTheTargetedShipMovesNormally [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.

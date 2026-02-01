@@ -31,12 +31,12 @@ AccelerationEffect >> applyThrowEffectFor: aShip [
 	^ 1
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 AccelerationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 AccelerationEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
@@ -52,7 +52,8 @@ AccelerationEffect >> hasTarget: aShip [
 
 { #category : 'initialization' }
 AccelerationEffect >> initializeWith: anAccelerationValue [
-	accelerationValue := anAccelerationValue.
+
+	accelerationValue := anAccelerationValue
 ]
 
 { #category : 'accessing' }
@@ -61,13 +62,13 @@ AccelerationEffect >> isCalled: aName [
 	^ 'Acceleration Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 AccelerationEffect >> targetTo: aTargetShip [
 
 	^ self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 AccelerationEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self

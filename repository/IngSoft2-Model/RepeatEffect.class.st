@@ -29,14 +29,14 @@ RepeatEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	aTargetShip isAValidTargetShip ifFalse: [
 		Error signal: 'Repeat Card requiers a target ship.' ].
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 RepeatEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
@@ -58,12 +58,12 @@ RepeatEffect >> isCalled: aName [
 	^ 'Repeat Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip [
 	^ self class targetedTo: aTargetShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 	^ self class targetedTo: aTargetShip
 ]

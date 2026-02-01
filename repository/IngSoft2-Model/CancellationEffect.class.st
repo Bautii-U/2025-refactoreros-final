@@ -30,7 +30,7 @@ CancellationEffect >> applyThrowEffectFor: aShip [
 	
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 CancellationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	aTargetShip isAValidTargetShip ifFalse: [
@@ -40,7 +40,7 @@ CancellationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTar
 		Error signal: 'Cancellation Card requiers a target card.' ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 CancellationEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
@@ -50,7 +50,7 @@ CancellationEffect >> hasTarget: aShip [
 	^ targetShip = aShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 CancellationEffect >> intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName [
 
 	targetShip := aTargetShip.
@@ -63,7 +63,7 @@ CancellationEffect >> isCalled: aName [
 	^ 'Cancellation Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 CancellationEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetTo: aTargetShip whoPlayed: aTargetCardName

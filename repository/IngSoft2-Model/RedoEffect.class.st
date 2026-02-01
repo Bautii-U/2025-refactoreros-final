@@ -36,12 +36,12 @@ RedoEffect >> applyThrowEffectFor: aShip [
 	
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 RedoEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 RedoEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
@@ -64,12 +64,12 @@ RedoEffect >> isCalled: aName [
 	^ 'Redo Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RedoEffect >> targetTo: aTargetShip [
 	^ self class targetedTo: aTargetShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RedoEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetTo: aTargetShip whoPlayed: aTargetCardName

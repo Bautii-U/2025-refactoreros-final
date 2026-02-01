@@ -34,14 +34,14 @@ SpeedEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 SpeedEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	aTargetShip isAValidTargetShip ifFalse: [
 		Error signal: 'Speed Card requiers a target ship.' ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'checking' }
 SpeedEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
@@ -67,13 +67,13 @@ SpeedEffect >> isCalled: aName [
 	^ 'Speed Card' = aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 SpeedEffect >> targetTo: aTargetShip [
 
 	^ self class ofValue: speedValue targetedTo: aTargetShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 SpeedEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class ofValue: speedValue targetedTo: aTargetShip
