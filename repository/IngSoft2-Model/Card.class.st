@@ -74,6 +74,12 @@ Card >> applyMercenaryEffectFor: aShip in: shipWithMercenaries [
 ]
 
 { #category : 'actions' }
+Card >> applyOnPlayed: aGame [
+
+	effect applyPlayedEffectIn: aGame from: owner to: NullShip new
+]
+
+{ #category : 'actions' }
 Card >> applyOnPlayed: aGame to: aTargetShip [
 
 	effect applyPlayedEffectIn: aGame from: owner to: aTargetShip

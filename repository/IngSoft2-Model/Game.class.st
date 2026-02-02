@@ -279,7 +279,7 @@ Game >> throw: aCardName from: aShipName [
 
 	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1).
 	
-	card applyOnPlayed: self to: ''.
+	card applyOnPlayed: self.
 	activeCards addFirst: card.
 ]
 
