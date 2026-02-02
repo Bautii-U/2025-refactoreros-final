@@ -44,6 +44,10 @@ AccelerationEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTur
 			'The ship is trying to use a permanent card out of its turn' ]
 ]
 
+{ #category : 'checking' }
+AccelerationEffect >> checkTargetShip: aTargetShip [
+]
+
 { #category : 'testing' }
 AccelerationEffect >> hasTarget: aShip [
 

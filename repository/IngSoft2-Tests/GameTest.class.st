@@ -1124,7 +1124,7 @@ GameTest >> testC11WhenARedoCardIsPlayedWithoutACardPlayedPreviouslyThenItFails 
 ]
 
 { #category : 'tests' }
-GameTest >> testC12WhenARedoCardIsPlayedByAShipAndItActivatesForAnotherPlayerThenIsValid [
+GameTest >> testC12WhenARedoCardIsPlayedByAShipAndItActivatesForAnotherPlayerThenValid [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.

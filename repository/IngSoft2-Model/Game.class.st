@@ -277,7 +277,7 @@ Game >> throw: aCardName from: aShipName [
 	| queriedShip card |
 	queriedShip := self searchShipByName: aShipName.
 
-	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: (NullShip new) whoPlayed: ''.
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1).
 	
 	card applyOnPlayed: self to: ''.
 	activeCards addFirst: card.
@@ -290,7 +290,7 @@ Game >> throw: aCardName from: aShipName to: aTargetShipName [
 	queriedShip := self searchShipByName: aShipName.
 	queriedTargetShip := self searchShipByName: aTargetShipName.
 	
-	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: queriedTargetShip whoPlayed: ''.
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) to: queriedTargetShip.
 	
 	card applyOnPlayed: self to: queriedTargetShip. 
 	activeCards addFirst: card.

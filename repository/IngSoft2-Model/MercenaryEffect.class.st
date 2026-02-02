@@ -36,9 +36,6 @@ MercenaryEffect >> applyThrowEffectFor: aShip [
 
 { #category : 'checking' }
 MercenaryEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-
-	aTargetShip isAValidTargetShip ifFalse: [
-		Error signal: 'Mercenary Card requiers a target ship.' ].
 ]
 
 { #category : 'checking' }
@@ -47,6 +44,13 @@ MercenaryEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf
 	aShip ~= anotherShip ifTrue: [
 		Error signal:
 			'The ship is trying to use a permanent card out of its turn' ]
+]
+
+{ #category : 'checking' }
+MercenaryEffect >> checkTargetShip: aTargetShip [
+
+	aTargetShip isAValidTargetShip ifFalse: [
+		Error signal: 'Mercenary Card requiers a target ship.' ]
 ]
 
 { #category : 'testing' }

@@ -149,11 +149,33 @@ Ship >> shields [
 ]
 
 { #category : 'actions' }
+Ship >> throw: aCardName whenTurnOf: currentShip [
+
+    | card |
+    card := self lookForCard: aCardName.
+    card checkForTurnRequierementWhen: self playsACardDuringTheTurnOf: currentShip.
+    cardsInHand remove: card.
+    
+    ^ card playedBy: self
+]
+
+{ #category : 'actions' }
+Ship >> throw: aCardName whenTurnOf: currentShip to: aTargetShip [
+
+    | card |
+    card := self lookForCard: aCardName.
+    card checkForTurnRequierementWhen: self playsACardDuringTheTurnOf: currentShip.
+    card checkForTargetRequirementsFor: aTargetShip.
+    cardsInHand remove: card.
+    
+    ^ card playedBy: self targetedTo: aTargetShip
+]
+
+{ #category : 'actions' }
 Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip whoPlayed: aTargetCardName [
 
 	| card |
 	card := self lookForCard: aCardName.
-
 	card checkForTurnRequierementWhen: self playsACardDuringTheTurnOf: aShip.
 	card checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName.
 	cardsInHand remove: card.

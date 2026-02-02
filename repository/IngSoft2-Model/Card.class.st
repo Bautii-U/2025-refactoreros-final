@@ -86,6 +86,12 @@ Card >> applyThrowEffectFor: aShip [
 ]
 
 { #category : 'checking' }
+Card >> checkForTargetRequirementsFor: aTargetShip [
+
+	effect checkTargetShip: aTargetShip.
+]
+
+{ #category : 'checking' }
 Card >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
 	effect
@@ -124,6 +130,18 @@ Card >> initializeOwnedBy: aShip causing: anEffect [
 Card >> is: aCardName ownedBy: aShip [
 
 	^ aShip = owner and: (effect isCalled: aCardName)
+]
+
+{ #category : 'actions' }
+Card >> playedBy: aShip [
+
+    ^ self class ownedBy: aShip causing: effect.
+]
+
+{ #category : 'actions' }
+Card >> playedBy: aShip targetedTo: aTargetShip [
+
+    ^ self class ownedBy: aShip causing: (effect targetTo: aTargetShip).
 ]
 
 { #category : 'actions' }

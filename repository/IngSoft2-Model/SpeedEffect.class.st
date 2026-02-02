@@ -36,9 +36,6 @@ SpeedEffect >> applyThrowEffectFor: aShip [
 
 { #category : 'checking' }
 SpeedEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-
-	aTargetShip isAValidTargetShip ifFalse: [
-		Error signal: 'Speed Card requiers a target ship.' ]
 ]
 
 { #category : 'checking' }
@@ -47,6 +44,13 @@ SpeedEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: an
 	aShip ~= anotherShip ifTrue: [
 		Error signal:
 			'The ship is trying to use a permanent card out of its turn' ]
+]
+
+{ #category : 'checking' }
+SpeedEffect >> checkTargetShip: aTargetShip [
+
+	aTargetShip isAValidTargetShip ifFalse: [
+		Error signal: 'Speed Card requiers a target ship.' ]
 ]
 
 { #category : 'testing' }

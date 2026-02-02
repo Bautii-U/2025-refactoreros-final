@@ -34,13 +34,17 @@ RepeatEffect >> applyThrowEffectFor: aShip [
 
 { #category : 'checking' }
 RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-
-	aTargetShip isAValidTargetShip ifFalse: [
-		Error signal: 'Repeat Card requiers a target ship.' ].
 ]
 
 { #category : 'checking' }
 RepeatEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
+]
+
+{ #category : 'checking' }
+RepeatEffect >> checkTargetShip: aTargetShip [
+
+	aTargetShip isAValidTargetShip ifFalse: [
+		Error signal: 'Repeat Card requiers a target ship.' ]
 ]
 
 { #category : 'testing' }
