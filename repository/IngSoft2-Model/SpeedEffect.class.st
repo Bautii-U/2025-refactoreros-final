@@ -42,7 +42,7 @@ SpeedEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCard
 ]
 
 { #category : 'checking' }
-SpeedEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+SpeedEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
 		Error signal:

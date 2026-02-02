@@ -42,7 +42,7 @@ MercenaryEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTarget
 ]
 
 { #category : 'checking' }
-MercenaryEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+MercenaryEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
 		Error signal:

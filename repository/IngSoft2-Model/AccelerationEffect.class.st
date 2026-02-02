@@ -37,7 +37,7 @@ AccelerationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTar
 ]
 
 { #category : 'checking' }
-AccelerationEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+AccelerationEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	aShip ~= anotherShip ifTrue: [
 		Error signal:

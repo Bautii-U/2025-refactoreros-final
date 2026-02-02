@@ -45,7 +45,7 @@ RedoEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardN
 ]
 
 { #category : 'checking' }
-RedoEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+RedoEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
 { #category : 'testing' }

@@ -94,10 +94,10 @@ Card >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]
 
 { #category : 'checking' }
-Card >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+Card >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	^ effect
-		  checkForTurnRequierementwhen: aShip
+		  checkForTurnRequierementWhen: aShip
 		  playsACardDuringTheTurnOf: anotherShip
 ]
 

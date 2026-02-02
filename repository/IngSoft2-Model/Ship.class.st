@@ -103,6 +103,15 @@ Ship >> lapCount [
 	^ position lap
 ]
 
+{ #category : 'comparing' }
+Ship >> lookForCard: aCardName [
+
+	(cardsInHand anySatisfy: [ :aCard | aCard hasSameTypeAs: aCardName ])
+		ifFalse: [ Error signal: 'The ship does not have this card' ].
+
+	^ cardsInHand detect: [ :aCard | aCard hasSameTypeAs: aCardName ]
+]
+
 { #category : 'actions' }
 Ship >> moveBackwardsBy: aPosition [
 
@@ -143,12 +152,9 @@ Ship >> shields [
 Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip whoPlayed: aTargetCardName [
 
 	| card |
-	(cardsInHand anySatisfy: [ :aCard | aCard hasSameTypeAs: aCardName ])
-		ifFalse: [ Error signal: 'The ship does not have this card' ].
-		
-	card := cardsInHand detect: [ :aCard | aCard hasSameTypeAs: aCardName ].
+	card := self lookForCard: aCardName.
 
-	card checkForTurnRequierementwhen: self playsACardDuringTheTurnOf: aShip.
+	card checkForTurnRequierementWhen: self playsACardDuringTheTurnOf: aShip.
 	card checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName.
 	cardsInHand remove: card.
 

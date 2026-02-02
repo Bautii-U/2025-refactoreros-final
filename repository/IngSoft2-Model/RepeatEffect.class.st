@@ -40,7 +40,7 @@ RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCar
 ]
 
 { #category : 'checking' }
-RepeatEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+RepeatEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
 { #category : 'testing' }

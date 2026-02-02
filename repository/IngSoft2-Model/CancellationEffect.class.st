@@ -44,7 +44,7 @@ CancellationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTar
 ]
 
 { #category : 'checking' }
-CancellationEffect >> checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: anotherShip [
+CancellationEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
 { #category : 'testing' }

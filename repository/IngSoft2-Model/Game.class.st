@@ -126,7 +126,7 @@ Game >> applyRedoTo: aTargetShip from: aShip whoPlayed: aCard [
 
 	newCard := (activeCards at: 1) playedBy: aShip targetedTo: aTargetShip whoPlayed: aCard.
 	
-	newCard checkForTurnRequierementwhen: aShip playsACardDuringTheTurnOf: (ships at: 1).
+	newCard checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: (ships at: 1).
 	newCard applyOnPlayed: self to: aTargetShip.
 	activeCards addFirst: newCard.
 	 
