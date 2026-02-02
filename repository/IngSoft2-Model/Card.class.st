@@ -1,3 +1,6 @@
+"
+Cards are special game elements that ships can acquire and use to trigger effects, either instantly or over time, according to their type and the rules of the game.
+"
 Class {
 	#name : 'Card',
 	#superclass : 'Object',
