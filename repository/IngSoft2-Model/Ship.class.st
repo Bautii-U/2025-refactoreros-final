@@ -145,8 +145,8 @@ Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip whoPlayed: aTargetCar
 	| card |
 	(cardsInHand anySatisfy: [ :aCard | aCard hasSameTypeAs: aCardName ])
 		ifFalse: [ Error signal: 'The ship does not have this card' ].
-	card := cardsInHand detect: [ :aCard |
-		        aCard hasSameTypeAs: aCardName ].
+		
+	card := cardsInHand detect: [ :aCard | aCard hasSameTypeAs: aCardName ].
 
 	card checkForTurnRequierementwhen: self playsACardDuringTheTurnOf: aShip.
 	card checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName.

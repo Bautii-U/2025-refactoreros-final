@@ -723,9 +723,9 @@ GameTest >> testC01WhenShipIsCreatedWithTwoCardsThenValid [
 ]
 
 { #category : 'tests' }
-GameTest >> testC02WhenShipLandsOnDrawCardSquareAndObtainsANewCardThenValid [
+GameTest >> testC021WhenShipLandsOnDrawCardSquareAndObtainsOnlyTheBoardAvailableCardsThenValid [
 
-	| aGame dice aSetOfSquares shipNames aBoard |
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards lastCard |
 	dice := OrderedCollection new.
 	dice add: (LoadedDie withSetNumbers: #( 2 )).
 	aSetOfSquares := {
@@ -733,18 +733,58 @@ GameTest >> testC02WhenShipLandsOnDrawCardSquareAndObtainsANewCardThenValid [
 		                 EmptySquare new.
 		                 DrawCardSquare new.
 		                 EmptySquare new } asOrderedCollection.
+		
+	aDeckOfCards := { Card speedWithoutOwner }.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
 		          withTotalDistanceOf: (Parsec amount: 50)
-		          toBePlayedOnRolling: dice.
+		          toBePlayedOnRolling: dice
+					 withDeck: aDeckOfCards.
 
 	shipNames := #( 'Player 1' ).
 
 	aGame := Game gamePlayedBy: shipNames on: aBoard toPlayFor: 2.
 	aGame play.
 
-	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 3
+	lastCard := (aGame cardsInHandOf: 'Player 1') last.
+
+	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 3.
+	self assert: (lastCard hasSameTypeAs: 'Speed Card').
+]
+
+{ #category : 'tests' }
+GameTest >> testC02WhenShipLandsOnDrawCardSquareAndObtainsANewCardThenValid [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 2 )).
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 DrawCardSquare new.
+		                 EmptySquare new } asOrderedCollection.
+		
+	aDeckOfCards := {
+		            Card speedWithoutOwner.
+		            Card mercenaryWithoutOwner.
+		            Card accelerationWithoutOwner.
+		            Card cancellationWithoutOwner.
+		            Card redoWithoutOwner.
+		            Card repeatWithoutOwner }.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+					 withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game gamePlayedBy: shipNames on: aBoard toPlayFor: 2.
+	aGame play.
+
+	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 3.
 ]
 
 { #category : 'tests' }

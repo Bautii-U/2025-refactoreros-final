@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'squares',
 		'parsecs',
-		'dice'
+		'dice',
+		'deck'
 	],
 	#category : 'IngSoft2-Model-Game',
 	#package : 'IngSoft2-Model',
@@ -41,6 +42,7 @@ Board class >> populatedBy: aSquareGenerator anAmountOf: aNumberOfSquares withTo
 		  initializePopulatedOf: aSetOfSquares
 		  withDistanceOf: aDistance toParsecs
 		  toBePlayedOnRolling: aDiceSet
+		  withDeck: OrderedCollection new
 ]
 
 { #category : 'instance creation' }
@@ -52,14 +54,36 @@ Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance toBePla
 		  initializePopulatedOf: aSetOfSquares
 		  withDistanceOf: aDistance toParsecs
 		  toBePlayedOnRolling: aDiceSet
+		  withDeck: OrderedCollection new
+]
+
+{ #category : 'instance creation' }
+Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance toBePlayedOnRolling: aDiceSet withDeck: aCollectionOfCards [
+
+	self checkValidDice: aDiceSet.
+
+	^ self new
+		  initializePopulatedOf: aSetOfSquares
+		  withDistanceOf: aDistance toParsecs
+		  toBePlayedOnRolling: aDiceSet
+		  withDeck: aCollectionOfCards
+]
+
+{ #category : 'actions' }
+Board >> giveRandomCardTo: aShip [
+
+	| card |
+	card := deck atRandom deepCopy.
+	aShip drawCard: card
 ]
 
 { #category : 'initialization' }
-Board >> initializePopulatedOf: aSetOfSquares withDistanceOf: aNumberOfParsecs toBePlayedOnRolling: aDiceSet [
+Board >> initializePopulatedOf: aSetOfSquares withDistanceOf: aNumberOfParsecs toBePlayedOnRolling: aDiceSet withDeck: aCollectionOfCards [
 
 	squares := aSetOfSquares deepCopy.
 	parsecs := aNumberOfParsecs.
-	dice := aDiceSet
+	dice := aDiceSet.
+	deck := aCollectionOfCards
 ]
 
 { #category : 'accessing' }
