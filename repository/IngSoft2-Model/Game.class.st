@@ -66,17 +66,17 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal [
 	self checkValidLapCount: aLapGoal.
 
 	allCards := {
-		            SpeedCard new.
-		            MercenaryCard new.
-		            AccelerationCard new.
-		            CancellationCard new.
-		            RedoCard new.
-		            RepeatCard new }.
+		            Card speedWithoutOwner.
+		            Card mercenaryWithoutOwner.
+		            Card accelerationWithoutOwner.
+		            Card cancellationWithoutOwner.
+		            Card redoWithoutOwner.
+		            Card repeatWithoutOwner }.
+
 	ships := self
 		         createShipsNamed: shipNames
 		         on: aBoard numberOfSquares
 		         drawingFrom: allCards.
-
 
 	^ self new initializeWith: ships on: aBoard toPlayFor: aLapGoal
 ]
