@@ -61,6 +61,7 @@ SpeedEffect >> hasTarget: aShip [
 
 { #category : 'initialization' }
 SpeedEffect >> initializeWithSpeedValue: aSpeedValue and: aTargetShip [
+
 	speedValue := aSpeedValue.
 	targetShip := aTargetShip
 ]

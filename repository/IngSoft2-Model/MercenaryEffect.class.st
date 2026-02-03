@@ -19,7 +19,8 @@ MercenaryEffect class >> targetedTo: aTargetShip [
 
 { #category : 'actions' }
 MercenaryEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
- aShip = cardOwner ifTrue: [ aListMercenaries add: targetShip ]
+
+	aShip = cardOwner ifTrue: [ aListMercenaries add: targetShip ]
 ]
 
 { #category : 'actions' }
@@ -30,8 +31,8 @@ MercenaryEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 { #category : 'actions' }
 MercenaryEffect >> applyThrowEffectFor: aShip [
+
 	^ 0
-	
 ]
 
 { #category : 'checking' }

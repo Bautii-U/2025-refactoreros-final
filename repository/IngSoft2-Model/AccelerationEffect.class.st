@@ -28,6 +28,7 @@ AccelerationEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 { #category : 'actions' }
 AccelerationEffect >> applyThrowEffectFor: aShip [
+
 	^ 1
 ]
 

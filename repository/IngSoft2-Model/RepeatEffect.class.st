@@ -29,6 +29,7 @@ RepeatEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 { #category : 'actions' }
 RepeatEffect >> applyThrowEffectFor: aShip [
+
 	^ 0
 ]
 
@@ -67,10 +68,12 @@ RepeatEffect >> isCalled: aName [
 
 { #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip [
+
 	^ self class targetedTo: aTargetShip
 ]
 
 { #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
+
 	^ self class targetedTo: aTargetShip
 ]

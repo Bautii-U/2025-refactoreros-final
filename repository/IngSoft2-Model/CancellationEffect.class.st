@@ -24,13 +24,14 @@ CancellationEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: 
 
 { #category : 'actions' }
 CancellationEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
+
 	aGame applyCancellationTo: targetShip whoPlayed: targetCardName
 ]
 
 { #category : 'actions' }
 CancellationEffect >> applyThrowEffectFor: aShip [
+
 	^ 0
-	
 ]
 
 { #category : 'checking' }

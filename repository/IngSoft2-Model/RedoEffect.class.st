@@ -35,8 +35,8 @@ RedoEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 { #category : 'actions' }
 RedoEffect >> applyThrowEffectFor: aShip [
+
 	^ 0
-	
 ]
 
 { #category : 'checking' }
@@ -73,6 +73,7 @@ RedoEffect >> isCalled: aName [
 
 { #category : 'actions' }
 RedoEffect >> targetTo: aTargetShip [
+
 	^ self class targetedTo: aTargetShip
 ]
 
