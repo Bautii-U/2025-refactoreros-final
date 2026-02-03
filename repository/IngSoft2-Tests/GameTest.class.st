@@ -858,7 +858,7 @@ GameTest >> testC04WhenShipPlaysACardThatDoesNotHaveInHandThenItFails [
 ]
 
 { #category : 'tests' }
-GameTest >> testC05WhenAShipPlaysAPermanentCardOutOfItsTurnThenItFails [
+GameTest >> testC05WhenAShipPlaysAPermanentCardOutOfItsTurnItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -894,7 +894,7 @@ GameTest >> testC05WhenAShipPlaysAPermanentCardOutOfItsTurnThenItFails [
 ]
 
 { #category : 'tests' }
-GameTest >> testC06WhenAShipPlaysSpeedCardAndItIncrementItsDiceRollThenValid [
+GameTest >> testC06WhenAShipPlaysSpeedCardThenMovementIsIncremented [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -973,7 +973,7 @@ GameTest >> testC07WhenACancellationCardIsPlayedAndThePermanentCardIsDeactivated
 ]
 
 { #category : 'tests' }
-GameTest >> testC08WhenACancellationCardIsPlayedAndTheTargetCardIsNotActiveThenItFails [
+GameTest >> testC08WhenACancellationCardIsPlayedAndTheTargetCardIsNotActiveItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1015,7 +1015,7 @@ GameTest >> testC08WhenACancellationCardIsPlayedAndTheTargetCardIsNotActiveThenI
 ]
 
 { #category : 'tests' }
-GameTest >> testC09WhenACancellationCardTargetsANonPermanentCardThenItFails [
+GameTest >> testC09WhenACancellationCardTargetsANonPermanentCardItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1057,7 +1057,7 @@ GameTest >> testC09WhenACancellationCardTargetsANonPermanentCardThenItFails [
 ]
 
 { #category : 'tests' }
-GameTest >> testC10WhenARedoCardIsPlayedAfterAPermanentCardAndHasTheSameEffectThenValid [
+GameTest >> testC10WhenARedoCardRecreatesAPermanentCardEffectThenValid [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1093,7 +1093,7 @@ GameTest >> testC10WhenARedoCardIsPlayedAfterAPermanentCardAndHasTheSameEffectTh
 ]
 
 { #category : 'tests' }
-GameTest >> testC11WhenARedoCardIsPlayedWithoutACardPlayedPreviouslyThenItFails [
+GameTest >> testC11WhenARedoCardIsPlayedWithoutACardPlayedPreviouslyItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1164,7 +1164,7 @@ GameTest >> testC12WhenARedoCardIsPlayedByAShipAndItActivatesForAnotherPlayerThe
 ]
 
 { #category : 'tests' }
-GameTest >> testC13WhenRedoCardIsPlayedByAShipAfterAPermanentCardAndItsNotTheTurnOfTheShipThenItFails [
+GameTest >> testC13WhenRedoCardIsPlayedByAShipAfterAPermanentCardAndItsNotTheTurnOfTheShipItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1204,7 +1204,7 @@ GameTest >> testC13WhenRedoCardIsPlayedByAShipAfterAPermanentCardAndItsNotTheTur
 ]
 
 { #category : 'tests' }
-GameTest >> testC14WhenARedoCardIsPlayedAfterAnInstantaneousCardAndHasTheSameEffectThenValid [
+GameTest >> testC14WhenARedoCardRecreatesAnInstantaneousCardEffectThenValid [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 100.
@@ -1672,7 +1672,7 @@ GameTest >> testC24WhenAShipHiresMoreThanOneMercenaryAndTheyHelpInBattleThenVali
 ]
 
 { #category : 'tests' }
-GameTest >> testC25WhenAShipWithMercenariesLosesABattleAndAllBreakAShieldThenValid [
+GameTest >> testC25WhenAShipWithMercenariesLosesABattleThenTheyAllBreakAShield [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1722,7 +1722,7 @@ GameTest >> testC25WhenAShipWithMercenariesLosesABattleAndAllBreakAShieldThenVal
 ]
 
 { #category : 'tests' }
-GameTest >> testC26WhenAShipHiresAMercenaryAndItHasAlreadyBeenHiredThenItFails [
+GameTest >> testC26WhenAShipHiresAMercenaryAndItHasAlreadyBeenHiredItFails [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1837,7 +1837,7 @@ GameTest >> testC28WhenShipsBattleAndAPlayedAccelerationCardIncreasesTheDiceThro
 ]
 
 { #category : 'tests' }
-GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardAndTheLastSquareGetsRetriggeredTwiceThenValid [
+GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardThenLastSquareGetsRetriggeredTwice [
 
 	| aGame dice shipNames aBoard aDeckOfCards aSetOfSquares |
 	dice := OrderedCollection new.
@@ -1924,7 +1924,7 @@ GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactiva
 ]
 
 { #category : 'tests' }
-GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryAndTheMercenaryNoLongerHelpsInBattleThenValid [
+GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryThenTheMercenaryNoLongerHelpsInBattle [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
@@ -1964,7 +1964,7 @@ GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryAndTheMercenaryNoLo
 ]
 
 { #category : 'tests' }
-GameTest >> testC32WhenAShipUsesRedoCardAfterAMercenaryCardAndTwoShipsHelpInBattleThenValid [
+GameTest >> testC32WhenAShipPlaysRedoCardAfterAMercenaryCardThenTwoShipsHelpInBattle [
 
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
