@@ -816,7 +816,7 @@ GameTest >> testC03WhenAShipPlaysAccelerationCardAndAllShipsIncrementTheirDiceRo
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Acceleration Card' from: 'Player 1' to: 'Player 1'.
+	aGame throw: 'Acceleration Card' from: 'Player 1'.
 	aGame play.
 	aGame play.
 	aGame play.
@@ -1083,9 +1083,9 @@ GameTest >> testC10WhenARedoCardIsPlayedAfterAPermanentCardAndHasTheSameEffectTh
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw:'Acceleration Card' from: 'Player 1' to: 'Player 1'.
+	aGame throw: 'Acceleration Card' from: 'Player 1'.
 	aGame play.
-	aGame throw:'Redo Card' from: 'Player 2' to: 'Player 2'.
+	aGame throw: 'Redo Card' from: 'Player 2' to: 'Player 2'.
 	aGame play.
 
 	self assert: (aGame positionOf: 'Player 1') equals: 5.
