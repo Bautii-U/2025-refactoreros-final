@@ -39,8 +39,8 @@ HyperJumpSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: 
 	currentRewardIndex := currentRewardIndex + 1.
 	currentRewardIndex > rewards size ifTrue: [
 		currentRewardIndex := 1 ].
-
-	aShipManager checkBattles: aShip on: aBoard
+	
+	^ true
 ]
 
 { #category : 'initialization' }

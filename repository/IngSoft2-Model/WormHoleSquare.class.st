@@ -49,8 +49,8 @@ WormHoleSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: a
 	currentPosition = entrancePosition
 		ifTrue: [ aShip moveForwardBy: exitPosition - entrancePosition ]
 		ifFalse: [ aShip moveBackwardsBy: exitPosition - entrancePosition ].
-
-	aShipManager checkBattles: aShip on: aBoard
+		
+	^ true
 ]
 
 { #category : 'accessing' }

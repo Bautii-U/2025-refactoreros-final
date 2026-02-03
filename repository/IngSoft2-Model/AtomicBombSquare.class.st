@@ -14,5 +14,7 @@ AtomicBombSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy:
 
 	shipList do: [ :ship |
 		ship goToFirstSquare.
-		ship breakAShield ]
+		ship breakAShield ].
+	
+	^ false
 ]

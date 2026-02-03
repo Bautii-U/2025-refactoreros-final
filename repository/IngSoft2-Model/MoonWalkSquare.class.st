@@ -33,7 +33,8 @@ MoonWalkSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: a
 
 	shipList do: [ :ship |
 		ship = aShip ifFalse: [ ship moveBackwardsBy: backwardsPush ] ].
-	aShipManager checkBattles: aShip on: aBoard
+	
+	^ true
 ]
 
 { #category : 'accessing' }

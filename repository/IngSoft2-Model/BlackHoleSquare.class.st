@@ -13,5 +13,6 @@ Class {
 BlackHoleSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
 	aShip moveBackwardsBy: 4.
-	aShipManager checkBattles: aShip on: aBoard 
+	
+	^ true
 ]

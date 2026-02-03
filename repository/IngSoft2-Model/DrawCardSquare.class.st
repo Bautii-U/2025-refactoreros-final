@@ -12,5 +12,7 @@ Class {
 { #category : 'actions' }
 DrawCardSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	aBoard giveRandomCardTo: aShip
+	aBoard giveRandomCardTo: aShip.
+	
+	^ true
 ]

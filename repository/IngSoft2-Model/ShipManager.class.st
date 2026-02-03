@@ -116,11 +116,11 @@ ShipManager >> initializeWithShips: aSetOfShips andActiveCards: aListOfActiveCar
 { #category : 'actions' }
 ShipManager >> landShip: aShip atSquare: nextSquare on: aBoard [
 
-	nextSquare
-		applyEffectTo: gameShips
-		forShip: aShip
-		on: aBoard
-		managedBy: self
+	| shouldCheckBattles |
+	shouldCheckBattles := nextSquare applyEffectTo: gameShips forShip: aShip on: aBoard managedBy: self.
+	
+	shouldCheckBattles ifTrue: [ 
+		self checkBattles: aShip on: aBoard ]
 ]
 
 { #category : 'actions' }
