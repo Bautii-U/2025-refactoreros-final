@@ -35,7 +35,8 @@ Ship >> boardPosition [
 { #category : 'actions' }
 Ship >> breakAShield [
 
-	shields > 0 ifTrue: [ shields := shields - 1 ]
+	shields > 0 ifTrue: [ shields := shields - 1 ].
+	
 ]
 
 { #category : 'accessing' }
@@ -60,6 +61,12 @@ Ship >> goToFirstSquare [
 Ship >> hasGreaterPosition: anotherShip [
 
 	^  position isGreaterThan: (anotherShip position)
+]
+
+{ #category : 'testing' }
+Ship >> hasNoShields [
+
+	^ shields = 0
 ]
 
 { #category : 'testing' }

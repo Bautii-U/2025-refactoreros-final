@@ -25,11 +25,15 @@ ShipManager class >> withShips: aShipList andActiveCards: aActiveCardsList [
 { #category : 'actions' }
 ShipManager >> applyBattleLossTo: aShip [
 
-	| damageReceiver |
-	damageReceiver := activeCards detect: [ :aCard | aCard canProtect: aShip ]
+	| damageReceiver affectedShip |
+	damageReceiver := activeCards
+		                  detect: [ :aCard | aCard canProtect: aShip ]
 		                  ifNone: [ aShip ].
-
-	damageReceiver breakAShield
+	affectedShip := damageReceiver breakAShield.
+	
+	affectedShip hasNoShields ifFalse: [ ^ self ].
+	affectedShip goToFirstSquare.
+	shipTurnSkips at: affectedShip put: 2
 ]
 
 { #category : 'actions' }

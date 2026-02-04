@@ -102,7 +102,7 @@ Card >> applyThrowEffectFor: aShip [
 { #category : 'actions' }
 Card >> breakAShield [
 
-	effect takeDamage
+	^ effect takeDamage
 ]
 
 { #category : 'testing' }

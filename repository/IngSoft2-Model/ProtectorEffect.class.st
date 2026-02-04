@@ -78,7 +78,8 @@ ProtectorEffect >> isCalled: aName [
 { #category : 'actions' }
 ProtectorEffect >> takeDamage [
 
-	protectorShip breakAShield
+	protectorShip breakAShield.
+	^ protectorShip
 ]
 
 { #category : 'actions' }

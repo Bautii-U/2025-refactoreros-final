@@ -2163,3 +2163,39 @@ GameTest >> testD04WhenProtectorLastShieldIsBrokenForAHirererBattleThenGoesToSta
 	self assert: (aGame positionOf: 'Player 2') equals: 1.
 	
 ]
+
+{ #category : 'tests' }
+GameTest >> testD05AShipCanBattleAgainstItsProtector [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 1 1 2 6 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' ).
+
+	aDeckOfCards := {
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Protector Card' from: 'Player 1' to: 'Player 2'.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 2
+]
