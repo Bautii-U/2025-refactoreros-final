@@ -14,7 +14,8 @@ Class {
 
 { #category : 'instance creation' }
 MercenaryEffect class >> targetedTo: aTargetShip [
-^ self new initializeTargetedTo: aTargetShip
+
+	^ self new initializeTargetedTo: aTargetShip
 ]
 
 { #category : 'actions' }

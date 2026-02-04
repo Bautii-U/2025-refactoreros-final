@@ -15,11 +15,15 @@ Class {
 
 { #category : 'instance creation' }
 RedoEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
-	^ self new intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName
+
+	^ self new
+		  intializeTargetedTo: aTargetShip
+		  whoPlayed: aTargetCardName
 ]
 
 { #category : 'instance creation' }
 RedoEffect class >> targetedTo: aTargetPlayer [
+
 	^ self new intializeTargetedTo: aTargetPlayer whoPlayed: ''
 ]
 

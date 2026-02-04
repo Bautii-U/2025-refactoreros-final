@@ -14,7 +14,8 @@ Class {
 
 { #category : 'instance creation' }
 AccelerationEffect class >> ofValue: anAccelerationValue [
-	^ self new initializeWith: anAccelerationValue 
+
+	^ self new initializeWith: anAccelerationValue
 ]
 
 { #category : 'actions' }

@@ -14,6 +14,7 @@ Class {
 
 { #category : 'instance creation' }
 RepeatEffect class >> targetedTo: aTargetPlayer [
+
 	^ self new intializeTargetedTo: aTargetPlayer
 ]
 

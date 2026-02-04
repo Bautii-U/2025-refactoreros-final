@@ -15,7 +15,10 @@ Class {
 
 { #category : 'instance creation' }
 CancellationEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
-	^ self new intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName
+
+	^ self new
+		  intializeTargetedTo: aTargetShip
+		  whoPlayed: aTargetCardName
 ]
 
 { #category : 'actions' }

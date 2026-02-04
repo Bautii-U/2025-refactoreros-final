@@ -2126,7 +2126,7 @@ GameTest >> testD04WhenProtectorLastShieldIsBrokenForAHirererBattleThenGoesToSta
 	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
 	aBoardSize := 10.
 	dice := OrderedCollection new.
-	dice add: (LoadedDie withSetNumbers: #( 2 3 3 6 1 1 1 3 6 2 5 1 2)).
+	dice add: (LoadedDie withSetNumbers: #( 2 3 3 6 1 1 1 3 6 2 5 1 2 )).
 	squareGenerator := SquareGenerator withOnlyEmptySquares.
 	aBoard := Board
 		          populatedBy: squareGenerator
@@ -2292,4 +2292,45 @@ GameTest >> testD07AShipCanProtectMultiplyShipsSimultaneously [
 
 
 	self assert: (aGame shieldfOf: 'Player 1') equals: 1
+]
+
+{ #category : 'tests' }
+GameTest >> testD08ProtectorCardCanBeCancelledLeavingOwnerVulnerable [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 3 1 3 8 5 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
+
+	aDeckOfCards := {
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card cancellationWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+		
+	aGame throw: 'Protector Card' from: 'Player 1' to: 'Player 2'.
+	aGame play.
+	aGame play.
+	aGame throw: 'Cancellation Card' from: 'Player 3' to: 'Player 1' whoPlayed: 'Protector Card'.
+	aGame play.
+
+	self assert: (aGame shieldfOf: 'Player 1') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 3.
+	
 ]
