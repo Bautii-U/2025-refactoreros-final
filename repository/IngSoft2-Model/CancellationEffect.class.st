@@ -34,6 +34,12 @@ CancellationEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+CancellationEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 CancellationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 

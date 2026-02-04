@@ -35,6 +35,12 @@ MercenaryEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+MercenaryEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 MercenaryEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]

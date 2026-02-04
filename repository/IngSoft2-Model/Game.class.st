@@ -106,6 +106,16 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal drawingFrom
 ]
 
 { #category : 'actions' }
+Game >> applyBattleLossTo: aShip [
+
+	| damageReceiver |
+	damageReceiver := activeCards detect: [ :aCard | aCard canProtect: aShip ]
+		                  ifNone: [ aShip ].
+
+	damageReceiver breakAShield
+]
+
+{ #category : 'actions' }
 Game >> applyCancellationTo: aTargetShip whoPlayed: aTargetCardName [
 
 	| cardToBeCancelled |

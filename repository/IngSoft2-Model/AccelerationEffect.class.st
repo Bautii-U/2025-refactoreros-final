@@ -32,6 +32,12 @@ AccelerationEffect >> applyThrowEffectFor: aShip [
 	^ 1
 ]
 
+{ #category : 'testing' }
+AccelerationEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 AccelerationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 

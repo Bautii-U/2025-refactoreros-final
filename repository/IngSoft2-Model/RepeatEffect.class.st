@@ -33,6 +33,12 @@ RepeatEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+RepeatEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]

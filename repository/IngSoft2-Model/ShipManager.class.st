@@ -23,6 +23,16 @@ ShipManager class >> withShips: aShipList andActiveCards: aActiveCardsList [
 ]
 
 { #category : 'actions' }
+ShipManager >> applyBattleLossTo: aShip [
+
+	| damageReceiver |
+	damageReceiver := activeCards detect: [ :aCard | aCard canProtect: aShip ]
+		                  ifNone: [ aShip ].
+
+	damageReceiver breakAShield
+]
+
+{ #category : 'actions' }
 ShipManager >> battle: aShipWithMercenaries with: anotherShipWithMercenaries on: aBoard [
 
 	| rollA rollB loserShip |
@@ -62,7 +72,7 @@ ShipManager >> checkBattles: aShip on: aBoard [
 			anotherShipWithMercenaries := self getMercenariesOf: anotherShip.
 			loserShip := self battle: aShipWithMercenaries with: anotherShipWithMercenaries on: aBoard.
 			loserShipWithMercenaries := self getMercenariesOf: loserShip.
-			loserShipWithMercenaries do: [ :ship | ship breakAShield ].
+			loserShipWithMercenaries do: [ :ship | self applyBattleLossTo: ship ].
 			loserShip goToFirstSquare.
 			loserShip hasShields ifFalse: [ shipTurnSkips at: loserShip put: 2 ] ] ]
 

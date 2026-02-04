@@ -1608,10 +1608,7 @@ GameTest >> testC23WhenAMercenaryBattlesAndTheHirererDoesNotHelpThenValid [
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame
-		throw: 'Mercenary Card'
-		from: 'Player 1'
-		to: 'Player 2'.
+	aGame throw: 'Mercenary Card' from: 'Player 1' to: 'Player 2'.
 	aGame play.
 	aGame play.
 	aGame play.
@@ -2004,29 +2001,24 @@ GameTest >> testC32WhenAShipPlaysRedoCardAfterAMercenaryCardThenTwoShipsHelpInBa
 { #category : 'tests' }
 GameTest >> testD01WhenAShipLosesABattleAndItsProtectorBreakAShieldThenValid [
 
-	| aGame dice shipNames aBoard aDeckOfCards aSetOfSquares |
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
 	dice := OrderedCollection new.
-	dice add: (LoadedDie withSetNumbers: #( 2 2 1 3 4 1 3)).
-	aSetOfSquares := {
-		                 EmptySquare new.
-		                 EmptySquare new.
-		                 EmptySquare new.
-		                 EmptySquare new.
-		                 EmptySquare new.
-		                 EmptySquare new } asOrderedCollection.
-
+	dice add: (LoadedDie withSetNumbers: #( 1 3 3 5 1 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
 	aBoard := Board
-		          populatedOf: aSetOfSquares
-		          withTotalDistanceOf: (Parsec amount: 15)
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
 		          toBePlayedOnRolling: dice.
 
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
 		                Card speedWithoutOwner.
 		                Card speedWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
 		                Card speedWithoutOwner.
 		                Card speedWithoutOwner } asOrderedCollection.
 
@@ -2036,12 +2028,12 @@ GameTest >> testD01WhenAShipLosesABattleAndItsProtectorBreakAShieldThenValid [
 		         toPlayFor: 2
 		         drawingFrom: aDeckOfCards.
 
-	aGame throw: 'Protector Card' from: 'Player 1' to: 'Player 3'.
 	aGame play.
+	aGame throw: 'Protector Card' from: 'Player 2' to: 'Player 1'.
 	aGame play.
 	aGame play.
 
-	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
+	self assert: (aGame shieldfOf: 'Player 1') equals: 2.
 	self assert: (aGame shieldfOf: 'Player 2') equals: 3.
-	self assert: (aGame shieldfOf: 'Player 3') equals: 2
+	self assert: (aGame shieldfOf: 'Player 3') equals: 3
 ]

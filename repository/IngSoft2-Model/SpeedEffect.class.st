@@ -34,6 +34,12 @@ SpeedEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+SpeedEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 SpeedEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]

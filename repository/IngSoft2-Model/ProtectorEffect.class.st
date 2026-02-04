@@ -32,6 +32,12 @@ ProtectorEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+ProtectorEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ (cardOwner = aShip) and: [ protectorShip shields > 0 ]
+]
+
 { #category : 'checking' }
 ProtectorEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]
@@ -67,6 +73,12 @@ ProtectorEffect >> intializeTargetedTo: aTargetPlayer [
 ProtectorEffect >> isCalled: aName [
 
 	^ 'Protector Card' = aName
+]
+
+{ #category : 'actions' }
+ProtectorEffect >> takeDamage [
+
+	protectorShip breakAShield
 ]
 
 { #category : 'actions' }

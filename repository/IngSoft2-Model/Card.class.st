@@ -99,6 +99,18 @@ Card >> applyThrowEffectFor: aShip [
 	^ (effect applyThrowEffectFor: aShip)
 ]
 
+{ #category : 'actions' }
+Card >> breakAShield [
+
+	effect takeDamage
+]
+
+{ #category : 'testing' }
+Card >> canProtect: aShip [
+
+	^ effect canProtect: aShip ownedBy: owner
+]
+
 { #category : 'checking' }
 Card >> checkForTargetRequirementsFor: aTargetShip [
 

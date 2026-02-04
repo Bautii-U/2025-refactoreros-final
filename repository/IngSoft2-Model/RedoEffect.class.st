@@ -39,6 +39,12 @@ RedoEffect >> applyThrowEffectFor: aShip [
 	^ 0
 ]
 
+{ #category : 'testing' }
+RedoEffect >> canProtect: aShip ownedBy: cardOwner [
+
+	^ false
+]
+
 { #category : 'checking' }
 RedoEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 
