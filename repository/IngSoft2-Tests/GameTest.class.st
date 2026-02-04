@@ -2199,3 +2199,97 @@ GameTest >> testD05AShipCanBattleAgainstItsProtector [
 	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
 	self assert: (aGame shieldfOf: 'Player 2') equals: 2
 ]
+
+{ #category : 'tests' }
+GameTest >> testD06AShipCanHaveMultipleProtectorsAndAllProtectItsShield [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 3 1 2 3 8 6 3 6 8 2 6 8 2 3 6 6 8 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
+
+	aDeckOfCards := {
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Protector Card' from: 'Player 1' to: 'Player 2'.
+	aGame throw: 'Protector Card' from: 'Player 1' to: 'Player 3'.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 3') equals: 0
+]
+
+{ #category : 'tests' }
+GameTest >> testD07AShipCanProtectMultiplyShipsSimultaneously [
+
+	| aGame dice squareGenerator shipNames aBoard aBoardSize aDeckOfCards |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 7 2 3 3 7 5 1 1 5 7 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
+
+	aDeckOfCards := {
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card protectorWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame play.
+	aGame throw: 'Protector Card' from: 'Player 2' to: 'Player 1'.
+	aGame play.
+	aGame throw: 'Protector Card' from: 'Player 3' to: 'Player 1'.
+	aGame play.
+	aGame play.
+	aGame play.
+	aGame play.
+
+
+	self assert: (aGame shieldfOf: 'Player 1') equals: 1
+]
