@@ -45,6 +45,14 @@ Card class >> ownedBy: aShip causing: anEffect [
 ]
 
 { #category : 'instance creation' }
+Card class >> protectorWithoutOwner [
+
+	^ self new
+		  initializeOwnedBy: NullShip new
+		  causing: (ProtectorEffect targetedTo: NullShip new)
+]
+
+{ #category : 'instance creation' }
 Card class >> redoWithoutOwner [
 
 	^ self new

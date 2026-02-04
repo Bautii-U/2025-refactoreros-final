@@ -71,7 +71,8 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal [
 		            Card accelerationWithoutOwner.
 		            Card cancellationWithoutOwner.
 		            Card redoWithoutOwner.
-		            Card repeatWithoutOwner }.
+		            Card repeatWithoutOwner.
+		            Card protectorWithoutOwner }.
 
 	ships := self
 		         createShipsNamed: shipNames
@@ -136,7 +137,7 @@ Game >> applyRedoTo: aTargetShip from: aShip whoPlayed: aCard [
 Game >> applyRepeatTo: aTarget [
 
 	| targetedShip |
-	targetedShip := self searchShipByName: aTarget playerName .
+	targetedShip := self searchShipByName: aTarget playerName.
 
 	shipManager landShip: targetedShip atSquare: nextSquare on: board
 ]
@@ -159,10 +160,14 @@ Game >> checkForActiveGame [
 
 { #category : 'checking' }
 Game >> checkIf: aShip canHireAsMercenary: anotherShip [
-		| activeMercenaryCards |
-	activeMercenaryCards := activeCards select: [ :aCard | aCard hasSameTypeAs: 'Mercenary Card' ]. 
-	
-	(activeMercenaryCards anySatisfy: [ :aCard | aCard hasTarget: anotherShip ]) ifTrue: [ Error signal: 'Ship has already been hired as mercenary' ].
+
+	| activeMercenaryCards |
+	activeMercenaryCards := activeCards select: [ :aCard |
+		                        aCard hasSameTypeAs: 'Mercenary Card' ].
+
+	(activeMercenaryCards anySatisfy: [ :aCard |
+		 aCard hasTarget: anotherShip ]) ifTrue: [
+		Error signal: 'Ship has already been hired as mercenary' ]
 ]
 
 { #category : 'actions' }
