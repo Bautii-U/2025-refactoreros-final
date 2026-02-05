@@ -2542,5 +2542,88 @@ GameTest >> testD13ReversalCardMakesDrawCardSquareDiscardInsteadOfPickUp [
 	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 3.
 	aGame play.
 
-	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 0.
+	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 0
+]
+
+{ #category : 'tests' }
+GameTest >> testD14ReversalCardHasNoEffectOnAtomicBombSquare [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 2 3 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 AtomicBombSquare new.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' 'Player 2' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 4.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 1.
+	self assert: (aGame positionOf: 'Player 2') equals: 1.
+	self assert: (aGame shieldfOf: 'Player 1') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 2
+]
+
+{ #category : 'tests' }
+GameTest >> testD15ReversalCardHasNoEffectOnEmptySquare [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 1 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 2.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
+	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 1
 ]
