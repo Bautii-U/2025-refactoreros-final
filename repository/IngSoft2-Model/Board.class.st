@@ -70,6 +70,12 @@ Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance toBePla
 ]
 
 { #category : 'actions' }
+Board >> discardRandomCardTo: aShip [
+
+	aShip discardRandomCard
+]
+
+{ #category : 'actions' }
 Board >> giveRandomCardTo: aShip [
 
 	| card |

@@ -31,15 +31,19 @@ HyperJumpSquare class >> withRewards: aSetOfDistances [
 { #category : 'actions' }
 HyperJumpSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	| distanceInSquares |
+	| distanceInSquares isReverted |
 	distanceInSquares := (rewards at: currentRewardIndex) toParsecs
 	                     // aBoard parsecsPerSquare.
-	aShip moveForwardBy: distanceInSquares.
+
+	isReverted := aShipManager isSquareRevertedAt: aShip boardPosition.
+
+	isReverted
+		ifTrue: [ aShip moveBackwardsBy: distanceInSquares ]
+		ifFalse: [ aShip moveForwardBy: distanceInSquares ].
 
 	currentRewardIndex := currentRewardIndex + 1.
-	currentRewardIndex > rewards size ifTrue: [
-		currentRewardIndex := 1 ].
-	
+	currentRewardIndex > rewards size ifTrue: [ currentRewardIndex := 1 ].
+
 	^ true
 ]
 

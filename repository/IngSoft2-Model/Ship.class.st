@@ -46,6 +46,12 @@ Ship >> cardsInHand [
 ]
 
 { #category : 'actions' }
+Ship >> discardRandomCard [
+
+	cardsInHand ifNotEmpty: [ cardsInHand remove: cardsInHand atRandom ]
+]
+
+{ #category : 'actions' }
 Ship >> drawCard: aCard [
 		
 	cardsInHand add: aCard

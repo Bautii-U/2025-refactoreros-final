@@ -12,7 +12,12 @@ Class {
 { #category : 'actions' }
 DrawCardSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	aBoard giveRandomCardTo: aShip.
-	
+	| isReverted |
+	isReverted := aShipManager isSquareRevertedAt: aShip boardPosition.
+
+	isReverted
+		ifTrue: [ aBoard discardRandomCardTo: aShip ]
+		ifFalse: [ aBoard giveRandomCardTo: aShip ].
+
 	^ true
 ]
