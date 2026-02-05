@@ -12,7 +12,22 @@ Class {
 { #category : 'actions' }
 BlackHoleSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	aShip moveBackwardsBy: 4.
+	| isReverted |
+	isReverted := aShipManager isSquareRevertedAt: (aShip boardPosition).
+	
+	isReverted ifTrue: [ self applyReversalEffectTo: shipList for: aShip ] ifFalse: [ self applyNormalEffectTo: shipList forShip: aShip ].
 	
 	^ true
+]
+
+{ #category : 'actions' }
+BlackHoleSquare >> applyNormalEffectTo: shipList forShip: aShip [
+
+	aShip moveBackwardsBy: 4
+]
+
+{ #category : 'actions' }
+BlackHoleSquare >> applyReversalEffectTo: shipList for: aShip [
+
+	aShip moveForwardBy: 4
 ]

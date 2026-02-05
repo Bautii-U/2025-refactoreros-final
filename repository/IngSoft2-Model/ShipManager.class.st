@@ -127,6 +127,13 @@ ShipManager >> initializeWithShips: aSetOfShips andActiveCards: aListOfActiveCar
 	gameShips do: [ :aShip | shipTurnSkips at: aShip put: 0 ]
 ]
 
+{ #category : 'testing' }
+ShipManager >> isSquareRevertedAt: aSquareIndex [
+
+	^ activeCards anySatisfy: [ :card | card isReversalActiveAt: aSquareIndex ]
+
+]
+
 { #category : 'actions' }
 ShipManager >> landShip: aShip atSquare: nextSquare on: aBoard [
 

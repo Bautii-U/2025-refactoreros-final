@@ -149,6 +149,12 @@ Ship >> rechargeShields [
 	shields := maxShields
 ]
 
+{ #category : 'actions' }
+Ship >> restoreAShield [
+
+	shields := shields + 1
+]
+
 { #category : 'accessing' }
 Ship >> shields [
 
@@ -188,4 +194,16 @@ Ship >> throw: aCardName whenTurnOf: aShip to: aTargetShip whoPlayed: aTargetCar
 	cardsInHand remove: card.
 
 	^ card playedBy: self targetedTo: aTargetShip whoPlayed: aTargetCardName
+]
+
+{ #category : 'actions' }
+Ship >> throw: aCardName whenTurnOf: currentShip toSquare: aSquareIndex [
+
+	| card |
+	card := self lookForCard: aCardName.
+	card checkForTurnRequierementWhen: self playsACardDuringTheTurnOf: currentShip.
+	card checkForTargetRequirementsForSquare: aSquareIndex.
+	cardsInHand remove: card.
+
+	^ card playedBy: self targetedToSquare: aSquareIndex
 ]

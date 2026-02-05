@@ -22,7 +22,7 @@ RedoEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 ]
 
 { #category : 'instance creation' }
-RedoEffect class >> targetedTo: aTargetPlayer [
+RedoEffect class >> targetedToSquare: aTargetPlayer [
 
 	^ self new intializeTargetedTo: aTargetPlayer whoPlayed: ''
 ]
@@ -84,7 +84,7 @@ RedoEffect >> isCalled: aName [
 { #category : 'actions' }
 RedoEffect >> targetTo: aTargetShip [
 
-	^ self class targetedTo: aTargetShip
+	^ self class targetedToSquare: aTargetShip
 ]
 
 { #category : 'actions' }

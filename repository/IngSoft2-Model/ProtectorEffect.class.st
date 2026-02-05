@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-ProtectorEffect class >> targetedTo: aTargetPlayer [
+ProtectorEffect class >> targetedToSquare: aTargetPlayer [
 
 	^ self new intializeTargetedTo: aTargetPlayer
 ]
@@ -75,7 +75,7 @@ ProtectorEffect >> isCalled: aName [
 	^ 'Protector Card' = aName
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 ProtectorEffect >> takeDamage [
 
 	protectorShip breakAShield.
@@ -85,11 +85,11 @@ ProtectorEffect >> takeDamage [
 { #category : 'actions' }
 ProtectorEffect >> targetTo: aTargetShip [
 
-	^ self class targetedTo: aTargetShip
+	^ self class targetedToSquare: aTargetShip
 ]
 
 { #category : 'actions' }
 ProtectorEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
-	^ self class targetedTo: aTargetShip
+	^ self class targetedToSquare: aTargetShip
 ]

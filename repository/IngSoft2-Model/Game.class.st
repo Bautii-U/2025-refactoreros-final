@@ -311,6 +311,18 @@ Game >> throw: aCardName from: aShipName to: aTargetShipName whoPlayed: aTargetC
 	activeCards addFirst: card.
 ]
 
+{ #category : 'actions' }
+Game >> throw: aCardName from: aShipName toSquareAt: aSquareIndex [
+
+	| queriedShip card |
+	queriedShip := self searchShipByName: aShipName.
+	
+	card := queriedShip throw: aCardName whenTurnOf: (ships at: 1) toSquare: aSquareIndex.
+	
+	card applyOnPlayed: self. 
+	activeCards addFirst: card.
+]
+
 { #category : 'accessing' }
 Game >> winner [
 

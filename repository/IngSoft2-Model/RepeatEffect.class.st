@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-RepeatEffect class >> targetedTo: aTargetPlayer [
+RepeatEffect class >> targetedToSquare: aTargetPlayer [
 
 	^ self new intializeTargetedTo: aTargetPlayer
 ]
@@ -73,14 +73,20 @@ RepeatEffect >> isCalled: aName [
 	^ 'Repeat Card' = aName
 ]
 
+{ #category : 'testing' }
+RepeatEffect >> isReversalFor: aSquareIndex [
+
+	^ false
+]
+
 { #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip [
 
-	^ self class targetedTo: aTargetShip
+	^ self class targetedToSquare: aTargetShip
 ]
 
 { #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
-	^ self class targetedTo: aTargetShip
+	^ self class targetedToSquare: aTargetShip
 ]

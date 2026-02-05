@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-MercenaryEffect class >> targetedTo: aTargetShip [
+MercenaryEffect class >> targetedToSquare: aTargetShip [
 
 	^ self new initializeTargetedTo: aTargetShip
 ]
@@ -82,11 +82,11 @@ MercenaryEffect >> isCalled: aName [
 { #category : 'actions' }
 MercenaryEffect >> targetTo: aShip [
 
-	^ self class targetedTo: aShip
+	^ self class targetedToSquare: aShip
 ]
 
 { #category : 'actions' }
 MercenaryEffect >> targetTo: aShip whoPlayed: aTargetCardName [
 
-	^ self class targetedTo: aShip
+	^ self class targetedToSquare: aShip
 ]

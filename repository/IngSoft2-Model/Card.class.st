@@ -35,7 +35,7 @@ Card class >> mercenaryWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (MercenaryEffect targetedTo: NullShip new)
+		  causing: (MercenaryEffect targetedToSquare: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -49,7 +49,7 @@ Card class >> protectorWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (ProtectorEffect targetedTo: NullShip new)
+		  causing: (ProtectorEffect targetedToSquare: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -57,7 +57,7 @@ Card class >> redoWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (RedoEffect targetedTo: NullShip new)
+		  causing: (RedoEffect targetedToSquare: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -65,7 +65,15 @@ Card class >> repeatWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (RepeatEffect targetedTo: NullShip new)
+		  causing: (RepeatEffect targetedToSquare: NullShip new)
+]
+
+{ #category : 'instance creation' }
+Card class >> reversalWithoutOwner [
+
+	^ self new
+		  initializeOwnedBy: NullShip new
+		  causing: (ReversalEffect targetedToSquare: 0)
 ]
 
 { #category : 'instance creation' }
@@ -126,6 +134,12 @@ Card >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]
 
 { #category : 'checking' }
+Card >> checkForTargetRequirementsForSquare: aSquareIndex [
+
+	effect checkTargetSquare: aSquareIndex
+]
+
+{ #category : 'checking' }
 Card >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 
 	^ effect
@@ -158,6 +172,12 @@ Card >> is: aCardName ownedBy: aShip [
 	^ aShip = owner and: (effect isCalled: aCardName)
 ]
 
+{ #category : 'accessing' }
+Card >> isReversalActiveAt: aSquareIndex [
+
+	^ effect isReversalFor: aSquareIndex
+]
+
 { #category : 'actions' }
 Card >> playedBy: aShip [
 
@@ -174,4 +194,10 @@ Card >> playedBy: aShip targetedTo: aTargetShip [
 Card >> playedBy: aShip targetedTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class ownedBy: aShip causing: (effect targetTo: aTargetShip whoPlayed: aTargetCardName)
+]
+
+{ #category : 'actions' }
+Card >> playedBy: aShip targetedToSquare: aSquareIndex [
+
+    ^ self class ownedBy: aShip causing: (effect targetedToSquare: aSquareIndex).
 ]
