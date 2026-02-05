@@ -2627,3 +2627,93 @@ GameTest >> testD15ReversalCardHasNoEffectOnEmptySquare [
 	self assert: (aGame shieldfOf: 'Player 1') equals: 3.
 	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 1
 ]
+
+{ #category : 'tests' }
+GameTest >> testD16ReversalCardOnWormHoleEntryAtFirstLapSendsShipToStart [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 2 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10. 
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 3.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 1
+]
+
+{ #category : 'tests' }
+GameTest >> testD17ReversalCardOnWormHoleEntryAtSecondLapSendsShipToPreviousLapExit [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 11 2 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10. 
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 100)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 3
+		         drawingFrom: aDeckOfCards.
+
+	aGame play.
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 3.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 10.
+	self assert: (aGame lapCountOf: 'Player 1') equals: 0
+]

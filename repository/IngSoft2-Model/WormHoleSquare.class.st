@@ -30,9 +30,7 @@ WormHoleSquare class >> checkEntrance: anEntrancePosition isBeforeExit: anExitPo
 { #category : 'initialization' }
 WormHoleSquare class >> withEntranceAt: anEntrancePosition andExitAt: anExitPosition [
 
-	self
-		checkAboveZeroForEntrance: anEntrancePosition
-		andExit: anExitPosition.
+	self checkAboveZeroForEntrance: anEntrancePosition andExit: anExitPosition.
 	self checkEntrance: anEntrancePosition isBeforeExit: anExitPosition.
 
 	^ self new
@@ -43,14 +41,46 @@ WormHoleSquare class >> withEntranceAt: anEntrancePosition andExitAt: anExitPosi
 { #category : 'actions' }
 WormHoleSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	| currentPosition |
+	| currentPosition distance isReverted |
 	currentPosition := aShip boardPosition.
+	distance := exitPosition - entrancePosition.
+	isReverted := aShipManager isSquareRevertedAt: currentPosition.
 
 	currentPosition = entrancePosition
-		ifTrue: [ aShip moveForwardBy: exitPosition - entrancePosition ]
-		ifFalse: [ aShip moveBackwardsBy: exitPosition - entrancePosition ].
-		
+		ifTrue: [ self applyEntranceEffectFor: aShip on: aBoard managedBy: aShipManager ]
+		ifFalse: [ self applyExitEffectFor: aShip on: aBoard managedBy: aShipManager ].
+
 	^ true
+]
+
+{ #category : 'actions' }
+WormHoleSquare >> applyEntranceEffectFor: aShip on: aBoard managedBy: aShipManager [
+
+	| isReverted distance |
+	isReverted := aShipManager isSquareRevertedAt: entrancePosition.
+	distance := exitPosition - entrancePosition.
+
+	(aShipManager isSquareRevertedAt: entrancePosition)
+		ifTrue: [ 
+			aShip lapCount = 0
+				ifTrue: [ aShip goToFirstSquare ]
+				ifFalse: [ 
+					aShip moveForwardBy: distance.
+					aShip moveBackwardsBy: aBoard numberOfSquares ] ]
+		ifFalse: [ 
+			aShip moveForwardBy: distance ]
+]
+
+{ #category : 'actions' }
+WormHoleSquare >> applyExitEffectFor: aShip on: aBoard managedBy: aShipManager [
+
+	| isReverted distance |
+	isReverted := aShipManager isSquareRevertedAt: exitPosition.
+	distance := exitPosition - entrancePosition.
+
+	aShip moveBackwardsBy: distance.
+
+	isReverted ifTrue: [ aShip moveForwardBy: aBoard size ] "Esto seguramente sea -> un atributo size"
 ]
 
 { #category : 'accessing' }
