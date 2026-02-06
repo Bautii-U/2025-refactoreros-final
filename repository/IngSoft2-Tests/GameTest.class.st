@@ -2762,3 +2762,43 @@ GameTest >> testD18ReversalCardOnWormHoleExitSendsShipToNextLapEntrance [
 	self assert: (aGame positionOf: 'Player 1') equals: 3.
 	self assert: (aGame lapCountOf: 'Player 1') equals: 1
 ]
+
+{ #category : 'tests' }
+GameTest >> testD19ReversalCardCanBeCancelledRestoringSquareToNormal [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 1 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 DrawCardSquare new.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card cancellationWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' 'Player 2' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 2.
+	aGame throw: 'Cancellation Card' from: 'Player 2' to: 'Player 1' whoPlayed: 'Reversal Card'.
+	aGame play.
+	
+	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 2.
+]

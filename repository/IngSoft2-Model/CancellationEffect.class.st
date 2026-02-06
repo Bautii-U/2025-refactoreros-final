@@ -80,6 +80,12 @@ CancellationEffect >> isCalled: aName [
 	^ 'Cancellation Card' = aName
 ]
 
+{ #category : 'testing' }
+CancellationEffect >> isReversalFor: aSquareIndex [
+
+	^ false
+]
+
 { #category : 'actions' }
 CancellationEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 

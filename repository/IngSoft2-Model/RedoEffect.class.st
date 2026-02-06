@@ -62,6 +62,10 @@ RedoEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: ano
 RedoEffect >> checkTargetShip: aTargetShip [
 ]
 
+{ #category : 'checking' }
+RedoEffect >> checkTargetSquare: aSquareIndex [
+]
+
 { #category : 'testing' }
 RedoEffect >> hasTarget: aShip [
 
