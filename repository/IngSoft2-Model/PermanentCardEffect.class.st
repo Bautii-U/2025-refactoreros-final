@@ -1,3 +1,6 @@
+"
+Abstract subclass for effects that persist in the game or modify the ship's state over time. It enforces the rule that these cards can only be played during the owner's turn.
+"
 Class {
 	#name : 'PermanentCardEffect',
 	#superclass : 'CardEffect',

@@ -1,3 +1,6 @@
+"
+Abstract base class defining the default behavior for all card effects, providing safe 'do nothing' hooks. Subclasses override specific methods to implement unique card logic without duplicating code.
+"
 Class {
 	#name : 'CardEffect',
 	#superclass : 'Object',
@@ -72,7 +75,7 @@ CardEffect >> targetTo: aTargetShip whoPlayed: aCardName [
 ]
 
 { #category : 'actions' }
-CardEffect >> targetedToSquare: aSquareIndex [
+CardEffect >> targetedTo: aSquareIndex [
 
 	^ self
 

@@ -2834,3 +2834,48 @@ GameTest >> testD20WhenReversalCardTriesToInvertANegativeSquareIndexItFails [
 		raise: Error
 		withMessageText: 'Reversal Card requires a valid square index.'
 ]
+
+{ #category : 'tests' }
+GameTest >> testD21RedoCardCanRepeatAReversalCardOnADifferentSquare [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := { (LoadedDie withSetNumbers: #( 1 2 3 )) } asOrderedCollection.
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 (MoonWalkSquare withBackwardsPush: 1).
+		                 (MoonWalkSquare withBackwardsPush: 1).
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card redoWithoutOwner.
+		                Card speedWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' 'Player 2' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 4.
+	aGame play.
+	aGame throw: 'Redo Card' from: 'Player 2' toSquareAt: 5.
+	aGame play.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 6
+]

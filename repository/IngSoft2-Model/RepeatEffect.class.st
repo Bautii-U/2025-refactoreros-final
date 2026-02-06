@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-RepeatEffect class >> targetedToSquare: aTargetPlayer [
+RepeatEffect class >> targetedTo: aTargetPlayer [
 
 	^ self new initializeTargetedTo: aTargetPlayer
 ]
@@ -52,5 +52,5 @@ RepeatEffect >> isCalled: aName [
 { #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip [
 
-	^ self class targetedToSquare: aTargetShip
+	^ self class targetedTo: aTargetShip
 ]

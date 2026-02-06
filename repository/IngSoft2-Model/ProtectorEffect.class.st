@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-ProtectorEffect class >> targetedToSquare: aTargetPlayer [
+ProtectorEffect class >> targetedTo: aTargetPlayer [
 
 	^ self new initializeTargetedTo: aTargetPlayer
 ]
@@ -60,5 +60,5 @@ ProtectorEffect >> takeDamage [
 { #category : 'actions' }
 ProtectorEffect >> targetTo: aTargetShip [
 
-	^ self class targetedToSquare: aTargetShip
+	^ self class targetedTo: aTargetShip
 ]

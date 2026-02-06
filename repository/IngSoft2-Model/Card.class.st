@@ -35,7 +35,7 @@ Card class >> mercenaryWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (MercenaryEffect targetedToSquare: NullShip new)
+		  causing: (MercenaryEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -49,7 +49,7 @@ Card class >> protectorWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (ProtectorEffect targetedToSquare: NullShip new)
+		  causing: (ProtectorEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -57,7 +57,7 @@ Card class >> redoWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (RedoEffect targetedToSquare: NullShip new)
+		  causing: (RedoEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -65,7 +65,7 @@ Card class >> repeatWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (RepeatEffect targetedToSquare: NullShip new)
+		  causing: (RepeatEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
@@ -73,7 +73,7 @@ Card class >> reversalWithoutOwner [
 
 	^ self new
 		  initializeOwnedBy: NullShip new
-		  causing: (ReversalEffect targetedToSquare: 0)
+		  causing: (ReversalEffect targetedTo: 0)
 ]
 
 { #category : 'instance creation' }
@@ -204,5 +204,5 @@ Card >> playedBy: aShip targetedTo: aTargetShip whoPlayed: aTargetCardName [
 { #category : 'actions' }
 Card >> playedBy: aShip targetedToSquare: aSquareIndex [
 
-    ^ self class ownedBy: aShip causing: (effect targetedToSquare: aSquareIndex).
+    ^ self class ownedBy: aShip causing: (effect targetedTo: aSquareIndex).
 ]

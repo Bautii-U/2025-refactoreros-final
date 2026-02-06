@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-ReversalEffect class >> targetedToSquare: aSquareIndex [
+ReversalEffect class >> targetedTo: aSquareIndex [
 
 	^ self new initializeTargetedTo: aSquareIndex
 ]
@@ -57,13 +57,13 @@ ReversalEffect >> isReversalFor: aSquareIndex [
 { #category : 'actions' }
 ReversalEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
-	^ self class targetedToSquare: aTargetShip
+	^ self class targetedTo: aTargetShip
 ]
 
 { #category : 'actions' }
-ReversalEffect >> targetedToSquare: aSquareIndex [
+ReversalEffect >> targetedTo: aSquareIndex [
 
 	self checkTargetSquare: aSquareIndex.
 	
-	^ self class targetedToSquare: aSquareIndex 
+	^ self class targetedTo: aSquareIndex 
 ]
