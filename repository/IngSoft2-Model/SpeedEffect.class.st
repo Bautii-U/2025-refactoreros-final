@@ -3,7 +3,7 @@ When used in a permanent card, it increases the total die roll of a selected shi
 "
 Class {
 	#name : 'SpeedEffect',
-	#superclass : 'Object',
+	#superclass : 'PermanentCardEffect',
 	#instVars : [
 		'targetShip',
 		'speedValue'
@@ -20,36 +20,14 @@ SpeedEffect class >> ofValue: aSpeedValue targetedTo: aTarget [
 ]
 
 { #category : 'actions' }
-SpeedEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
-]
-
-{ #category : 'actions' }
-SpeedEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
-]
-
-{ #category : 'actions' }
 SpeedEffect >> applyThrowEffectFor: aShip [
 
 	aShip = targetShip ifTrue: [ ^ 1 ].
 	^ 0
 ]
 
-{ #category : 'testing' }
-SpeedEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
-]
-
 { #category : 'checking' }
 SpeedEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-]
-
-{ #category : 'checking' }
-SpeedEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-
-	aShip ~= anotherShip ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ]
 ]
 
 { #category : 'checking' }

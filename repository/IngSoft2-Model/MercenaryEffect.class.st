@@ -3,7 +3,7 @@ When used in a permanent card allows the ship to hire a mercenary ship as an all
 "
 Class {
 	#name : 'MercenaryEffect',
-	#superclass : 'Object',
+	#superclass : 'PermanentCardEffect',
 	#instVars : [
 		'targetShip'
 	],
@@ -28,30 +28,6 @@ MercenaryEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: car
 MercenaryEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 	aGame checkIf: owner canHireAsMercenary: aTargetShip
-]
-
-{ #category : 'actions' }
-MercenaryEffect >> applyThrowEffectFor: aShip [
-
-	^ 0
-]
-
-{ #category : 'testing' }
-MercenaryEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
-]
-
-{ #category : 'checking' }
-MercenaryEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-]
-
-{ #category : 'checking' }
-MercenaryEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-
-	aShip ~= anotherShip ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ]
 ]
 
 { #category : 'checking' }
@@ -81,12 +57,6 @@ MercenaryEffect >> isCalled: aName [
 
 { #category : 'actions' }
 MercenaryEffect >> targetTo: aShip [
-
-	^ self class targetedToSquare: aShip
-]
-
-{ #category : 'actions' }
-MercenaryEffect >> targetTo: aShip whoPlayed: aTargetCardName [
 
 	^ self class targetedToSquare: aShip
 ]

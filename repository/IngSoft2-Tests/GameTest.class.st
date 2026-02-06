@@ -2832,5 +2832,5 @@ GameTest >> testD20WhenReversalCardTriesToInvertANegativeSquareIndexItFails [
 	self
 		should: [ aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: -1 ]
 		raise: Error
-		withMessageText: 'Square index are always a positive number'
+		withMessageText: 'Reversal Card requires a valid square index.'
 ]

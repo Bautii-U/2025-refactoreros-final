@@ -3,7 +3,7 @@ When used in a permanent card, it increases the total die roll of all ships by 1
 "
 Class {
 	#name : 'AccelerationEffect',
-	#superclass : 'Object',
+	#superclass : 'PermanentCardEffect',
 	#instVars : [
 		'accelerationValue'
 	],
@@ -19,47 +19,9 @@ AccelerationEffect class >> ofValue: anAccelerationValue [
 ]
 
 { #category : 'actions' }
-AccelerationEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
-
-]
-
-{ #category : 'actions' }
-AccelerationEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
-]
-
-{ #category : 'actions' }
 AccelerationEffect >> applyThrowEffectFor: aShip [
 
-	^ 1
-]
-
-{ #category : 'testing' }
-AccelerationEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
-]
-
-{ #category : 'checking' }
-AccelerationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-
-]
-
-{ #category : 'checking' }
-AccelerationEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-
-	aShip ~= anotherShip ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ]
-]
-
-{ #category : 'checking' }
-AccelerationEffect >> checkTargetShip: aTargetShip [
-]
-
-{ #category : 'testing' }
-AccelerationEffect >> hasTarget: aShip [
-
-	^ false
+	^ accelerationValue
 ]
 
 { #category : 'initialization' }
@@ -72,16 +34,4 @@ AccelerationEffect >> initializeWith: anAccelerationValue [
 AccelerationEffect >> isCalled: aName [
 
 	^ 'Acceleration Card' = aName
-]
-
-{ #category : 'actions' }
-AccelerationEffect >> targetTo: aTargetShip [
-
-	^ self
-]
-
-{ #category : 'actions' }
-AccelerationEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
-
-	^ self
 ]

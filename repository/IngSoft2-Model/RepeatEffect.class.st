@@ -15,36 +15,36 @@ Class {
 { #category : 'instance creation' }
 RepeatEffect class >> targetedToSquare: aTargetPlayer [
 
-	^ self new intializeTargetedTo: aTargetPlayer
+	^ self new initializeTargetedTo: aTargetPlayer
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 	aGame applyRepeatTo: aTargetShip
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> applyThrowEffectFor: aShip [
 
 	^ 0
 ]
 
-{ #category : 'testing' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> canProtect: aShip ownedBy: cardOwner [
 
 	^ false
 ]
 
-{ #category : 'checking' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
 ]
 
-{ #category : 'checking' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
@@ -55,14 +55,14 @@ RepeatEffect >> checkTargetShip: aTargetShip [
 		Error signal: 'Repeat Card requiers a target ship.' ]
 ]
 
-{ #category : 'testing' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> hasTarget: aShip [
 
 	^ targetShip = aShip
 ]
 
 { #category : 'initialization' }
-RepeatEffect >> intializeTargetedTo: aTargetPlayer [
+RepeatEffect >> initializeTargetedTo: aTargetPlayer [
 
 	targetShip := aTargetPlayer
 ]
@@ -79,13 +79,13 @@ RepeatEffect >> isReversalFor: aSquareIndex [
 	^ false
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> targetTo: aTargetShip [
 
 	^ self class targetedToSquare: aTargetShip
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 RepeatEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetedToSquare: aTargetShip

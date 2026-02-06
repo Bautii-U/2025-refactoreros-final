@@ -3,9 +3,9 @@ An instant card that reapplies the last effect used in the game to a selected sh
 "
 Class {
 	#name : 'ProtectorEffect',
-	#superclass : 'Object',
+	#superclass : 'PermanentCardEffect',
 	#instVars : [
-		'protectorShip'
+		'targetShip'
 	],
 	#category : 'IngSoft2-Model-CardEffect',
 	#package : 'IngSoft2-Model',
@@ -15,39 +15,13 @@ Class {
 { #category : 'instance creation' }
 ProtectorEffect class >> targetedToSquare: aTargetPlayer [
 
-	^ self new intializeTargetedTo: aTargetPlayer
+	^ self new initializeTargetedTo: aTargetPlayer
 ]
 
-{ #category : 'actions' }
-ProtectorEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
-]
-
-{ #category : 'actions' }
-ProtectorEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
-]
-
-{ #category : 'actions' }
-ProtectorEffect >> applyThrowEffectFor: aShip [
-
-	^ 0
-]
-
-{ #category : 'testing' }
+{ #category : 'as yet unclassified' }
 ProtectorEffect >> canProtect: aShip ownedBy: cardOwner [
 
-	^ (cardOwner = aShip) and: [ protectorShip shields > 0 ]
-]
-
-{ #category : 'checking' }
-ProtectorEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-]
-
-{ #category : 'checking' }
-ProtectorEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-
-	aShip ~= anotherShip ifTrue: [
-		Error signal:
-			'The ship is trying to use a permanent card out of its turn' ]
+	^ (cardOwner = aShip) and: [ targetShip shields > 0 ]
 ]
 
 { #category : 'checking' }
@@ -57,16 +31,16 @@ ProtectorEffect >> checkTargetShip: aTargetShip [
 		Error signal: 'Protector Card requiers a target ship.' ]
 ]
 
-{ #category : 'testing' }
+{ #category : 'as yet unclassified' }
 ProtectorEffect >> hasTarget: aShip [
 
-	^ protectorShip = aShip
+	^ targetShip = aShip
 ]
 
 { #category : 'initialization' }
-ProtectorEffect >> intializeTargetedTo: aTargetPlayer [
+ProtectorEffect >> initializeTargetedTo: aTargetPlayer [
 
-	protectorShip := aTargetPlayer
+	targetShip := aTargetPlayer
 ]
 
 { #category : 'testing' }
@@ -78,18 +52,13 @@ ProtectorEffect >> isCalled: aName [
 { #category : 'as yet unclassified' }
 ProtectorEffect >> takeDamage [
 
-	protectorShip breakAShield.
-	^ protectorShip
+	targetShip breakAShield.
+	
+	^ targetShip
 ]
 
-{ #category : 'actions' }
+{ #category : 'as yet unclassified' }
 ProtectorEffect >> targetTo: aTargetShip [
-
-	^ self class targetedToSquare: aTargetShip
-]
-
-{ #category : 'actions' }
-ProtectorEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetedToSquare: aTargetShip
 ]
