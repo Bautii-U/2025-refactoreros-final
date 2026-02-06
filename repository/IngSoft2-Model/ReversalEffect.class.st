@@ -60,7 +60,7 @@ ReversalEffect >> checkTargetShip: aTargetShip [
 { #category : 'checking' }
 ReversalEffect >> checkTargetSquare: aSquareIndex [
 
-	"aSquareIndex > 0 ifFalse: [ Error signal: ]"
+	aSquareIndex > 0 ifFalse: [ Error signal: 'Square index are always a positive number' ]
 ]
 
 { #category : 'testing' }

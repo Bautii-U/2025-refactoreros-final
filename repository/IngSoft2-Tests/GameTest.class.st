@@ -2802,3 +2802,35 @@ GameTest >> testD19ReversalCardCanBeCancelledRestoringSquareToNormal [
 	
 	self assert: (aGame cardsInHandOf: 'Player 1') size equals: 2.
 ]
+
+{ #category : 'tests' }
+GameTest >> testD20WhenReversalCardTriesToInvertANegativeSquareIndexItFails [
+
+	| aGame dice shipNames aBoard aDeckOfCards squareGenerator aBoardSize |
+	aBoardSize := 10.
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 1 )).
+	squareGenerator := SquareGenerator withOnlyEmptySquares.
+	aBoard := Board
+		          populatedBy: squareGenerator
+		          anAmountOf: aBoardSize
+		          withTotalDistanceOf: (Parsec amount: 50)
+		          toBePlayedOnRolling: dice.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 2
+		         drawingFrom: aDeckOfCards.
+
+	self
+		should: [ aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: -1 ]
+		raise: Error
+		withMessageText: 'Square index are always a positive number'
+]
