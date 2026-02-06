@@ -17,7 +17,7 @@ CardEffect >> applyPlayedEffectIn: aGame from: owner to: aTarget [
 { #category : 'actions' }
 CardEffect >> applyThrowEffectFor: aShip [
 
-    ^ 0
+	^ 0
 ]
 
 { #category : 'testing' }

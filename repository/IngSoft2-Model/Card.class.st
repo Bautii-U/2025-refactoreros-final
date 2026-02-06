@@ -86,7 +86,11 @@ Card class >> speedWithoutOwner [
 
 { #category : 'actions' }
 Card >> applyMercenaryEffectFor: aShip in: shipWithMercenaries [
-	^ (effect applyMercenaryEffectFor: aShip in: shipWithMercenaries from: owner)
+
+	^ effect
+		  applyMercenaryEffectFor: aShip
+		  in: shipWithMercenaries
+		  from: owner
 ]
 
 { #category : 'actions' }
@@ -104,7 +108,7 @@ Card >> applyOnPlayed: aGame to: aTargetShip [
 { #category : 'actions' }
 Card >> applyThrowEffectFor: aShip [
 
-	^ (effect applyThrowEffectFor: aShip)
+	^ effect applyThrowEffectFor: aShip
 ]
 
 { #category : 'actions' }
@@ -149,7 +153,8 @@ Card >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherSh
 
 { #category : 'testing' }
 Card >> hasSameTypeAs: aCardName [
-	^ (effect isCalled: aCardName )
+
+	^ effect isCalled: aCardName
 ]
 
 { #category : 'testing' }

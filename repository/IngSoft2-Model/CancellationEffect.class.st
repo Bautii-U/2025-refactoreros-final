@@ -3,7 +3,7 @@ An instant card that removes an active permanent card from the game
 "
 Class {
 	#name : 'CancellationEffect',
-	#superclass : 'Object',
+	#superclass : 'CardEffect',
 	#instVars : [
 		'targetShip',
 		'targetCardName'
@@ -17,30 +17,14 @@ Class {
 CancellationEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self new
-		  intializeTargetedTo: aTargetShip
+		  initializeTargetedTo: aTargetShip
 		  whoPlayed: aTargetCardName
-]
-
-{ #category : 'actions' }
-CancellationEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
 ]
 
 { #category : 'actions' }
 CancellationEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 	aGame applyCancellationTo: targetShip whoPlayed: targetCardName
-]
-
-{ #category : 'actions' }
-CancellationEffect >> applyThrowEffectFor: aShip [
-
-	^ 0
-]
-
-{ #category : 'testing' }
-CancellationEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
 ]
 
 { #category : 'checking' }
@@ -53,14 +37,6 @@ CancellationEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTar
 		Error signal: 'Cancellation Card requiers a target card.' ]
 ]
 
-{ #category : 'checking' }
-CancellationEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-]
-
-{ #category : 'checking' }
-CancellationEffect >> checkTargetShip: aTargetShip [
-]
-
 { #category : 'testing' }
 CancellationEffect >> hasTarget: aShip [
 
@@ -68,7 +44,7 @@ CancellationEffect >> hasTarget: aShip [
 ]
 
 { #category : 'initialization' }
-CancellationEffect >> intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName [
+CancellationEffect >> initializeTargetedTo: aTargetShip whoPlayed: aTargetCardName [
 
 	targetShip := aTargetShip.
 	targetCardName := aTargetCardName
@@ -78,12 +54,6 @@ CancellationEffect >> intializeTargetedTo: aTargetShip whoPlayed: aTargetCardNam
 CancellationEffect >> isCalled: aName [
 
 	^ 'Cancellation Card' = aName
-]
-
-{ #category : 'testing' }
-CancellationEffect >> isReversalFor: aSquareIndex [
-
-	^ false
 ]
 
 { #category : 'actions' }

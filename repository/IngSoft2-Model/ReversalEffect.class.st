@@ -29,7 +29,7 @@ ReversalEffect >> checkTargetShip: aTargetShip [
 		Error signal: 'Protector Card requiers a target ship.' ]
 ]
 
-{ #category : 'checking' }
+{ #category : 'as yet unclassified' }
 ReversalEffect >> checkTargetSquare: aSquareIndex [
 
 	aSquareIndex > 0 ifFalse: [
@@ -48,7 +48,7 @@ ReversalEffect >> isCalled: aName [
 	^ 'Reversal Card' = aName
 ]
 
-{ #category : 'testing' }
+{ #category : 'as yet unclassified' }
 ReversalEffect >> isReversalFor: aSquareIndex [
 
 	^ targetSquareIndex = aSquareIndex

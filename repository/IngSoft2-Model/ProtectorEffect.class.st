@@ -31,7 +31,7 @@ ProtectorEffect >> checkTargetShip: aTargetShip [
 		Error signal: 'Protector Card requiers a target ship.' ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 ProtectorEffect >> hasTarget: aShip [
 
 	^ targetShip = aShip
@@ -57,7 +57,7 @@ ProtectorEffect >> takeDamage [
 	^ targetShip
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 ProtectorEffect >> targetTo: aTargetShip [
 
 	^ self class targetedToSquare: aTargetShip

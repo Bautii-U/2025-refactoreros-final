@@ -3,9 +3,9 @@ A card that mimics the effect of the last played card, regardless of its type (i
 "
 Class {
 	#name : 'RedoEffect',
-	#superclass : 'Object',
+	#superclass : 'CardEffect',
 	#instVars : [
-		'targetShip',
+		'target',
 		'targetCardName'
 	],
 	#category : 'IngSoft2-Model-CardEffect',
@@ -17,18 +17,14 @@ Class {
 RedoEffect class >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self new
-		  intializeTargetedTo: aTargetShip
+		  initializeTargetedTo: aTargetShip
 		  whoPlayed: aTargetCardName
 ]
 
 { #category : 'instance creation' }
 RedoEffect class >> targetedToSquare: aTargetPlayer [
 
-	^ self new intializeTargetedTo: aTargetPlayer whoPlayed: ''
-]
-
-{ #category : 'actions' }
-RedoEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
+	^ self new initializeTargetedTo: aTargetPlayer whoPlayed: ''
 ]
 
 { #category : 'actions' }
@@ -37,45 +33,30 @@ RedoEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 	aGame applyRedoTo: aTargetShip from: owner whoPlayed: targetCardName
 ]
 
-{ #category : 'actions' }
-RedoEffect >> applyThrowEffectFor: aShip [
-
-	^ 0
-]
-
-{ #category : 'testing' }
-RedoEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
-]
-
-{ #category : 'checking' }
-RedoEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-
-]
-
-{ #category : 'checking' }
-RedoEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
-]
-
 { #category : 'checking' }
 RedoEffect >> checkTargetShip: aTargetShip [
+
+	aTargetShip isAValidTargetShip ifFalse: [ 
+		Error signal: 'Redo Card target ship is invalid.' ]
 ]
 
 { #category : 'checking' }
 RedoEffect >> checkTargetSquare: aSquareIndex [
+
+	aSquareIndex > 0 ifFalse: [ 
+		Error signal: 'Redo Card target square must be valid.' ]
 ]
 
 { #category : 'testing' }
 RedoEffect >> hasTarget: aShip [
 
-	^ targetShip = aShip
+	^ target = aShip
 ]
 
 { #category : 'initialization' }
-RedoEffect >> intializeTargetedTo: aTargetShip whoPlayed: aTargetCardName [
+RedoEffect >> initializeTargetedTo: aTargetShip whoPlayed: aTargetCardName [
 
-	targetShip := aTargetShip.
+	target := aTargetShip.
 	targetCardName := aTargetCardName
 ]
 
@@ -95,4 +76,11 @@ RedoEffect >> targetTo: aTargetShip [
 RedoEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetTo: aTargetShip whoPlayed: aTargetCardName
+]
+
+{ #category : 'actions' }
+RedoEffect >> targetedToSquare: aSquareIndex [
+
+	self checkTargetSquare: aSquareIndex.
+	^ self class targetedTo: aSquareIndex
 ]

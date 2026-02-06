@@ -3,7 +3,7 @@ An instant card that reapplies the last effect used in the game to a selected sh
 "
 Class {
 	#name : 'RepeatEffect',
-	#superclass : 'Object',
+	#superclass : 'CardEffect',
 	#instVars : [
 		'targetShip'
 	],
@@ -18,34 +18,10 @@ RepeatEffect class >> targetedToSquare: aTargetPlayer [
 	^ self new initializeTargetedTo: aTargetPlayer
 ]
 
-{ #category : 'as yet unclassified' }
-RepeatEffect >> applyMercenaryEffectFor: aShip in: aListMercenaries from: cardOwner [
-]
-
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RepeatEffect >> applyPlayedEffectIn: aGame from: owner to: aTargetShip [
 
 	aGame applyRepeatTo: aTargetShip
-]
-
-{ #category : 'as yet unclassified' }
-RepeatEffect >> applyThrowEffectFor: aShip [
-
-	^ 0
-]
-
-{ #category : 'as yet unclassified' }
-RepeatEffect >> canProtect: aShip ownedBy: cardOwner [
-
-	^ false
-]
-
-{ #category : 'as yet unclassified' }
-RepeatEffect >> checkForTargetRequirementsFor: aTargetShip whoPlayed: aTargetCardName [
-]
-
-{ #category : 'as yet unclassified' }
-RepeatEffect >> checkForTurnRequierementWhen: aShip playsACardDuringTheTurnOf: anotherShip [
 ]
 
 { #category : 'checking' }
@@ -55,7 +31,7 @@ RepeatEffect >> checkTargetShip: aTargetShip [
 		Error signal: 'Repeat Card requiers a target ship.' ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 RepeatEffect >> hasTarget: aShip [
 
 	^ targetShip = aShip
@@ -73,20 +49,8 @@ RepeatEffect >> isCalled: aName [
 	^ 'Repeat Card' = aName
 ]
 
-{ #category : 'testing' }
-RepeatEffect >> isReversalFor: aSquareIndex [
-
-	^ false
-]
-
-{ #category : 'as yet unclassified' }
+{ #category : 'actions' }
 RepeatEffect >> targetTo: aTargetShip [
-
-	^ self class targetedToSquare: aTargetShip
-]
-
-{ #category : 'as yet unclassified' }
-RepeatEffect >> targetTo: aTargetShip whoPlayed: aTargetCardName [
 
 	^ self class targetedToSquare: aTargetShip
 ]
