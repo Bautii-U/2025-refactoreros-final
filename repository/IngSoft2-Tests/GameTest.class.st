@@ -2717,3 +2717,48 @@ GameTest >> testD17ReversalCardOnWormHoleEntryAtSecondLapSendsShipToPreviousLapE
 	self assert: (aGame positionOf: 'Player 1') equals: 10.
 	self assert: (aGame lapCountOf: 'Player 1') equals: 0
 ]
+
+{ #category : 'tests' }
+GameTest >> testD18ReversalCardOnWormHoleExitSendsShipToNextLapEntrance [
+
+	| aGame dice aSetOfSquares shipNames aBoard aDeckOfCards |
+	dice := OrderedCollection new.
+	dice add: (LoadedDie withSetNumbers: #( 9 )).
+
+	aSetOfSquares := {
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10. 
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 EmptySquare new.
+		                 WormHoleSquare withEntranceAt: 3 andExitAt: 10.
+		                 EmptySquare new } asOrderedCollection.
+
+	aDeckOfCards := {
+		                Card reversalWithoutOwner.
+		                Card speedWithoutOwner } asOrderedCollection.
+
+	aBoard := Board
+		          populatedOf: aSetOfSquares
+		          withTotalDistanceOf: (Parsec amount: 100)
+		          toBePlayedOnRolling: dice
+		          withDeck: aDeckOfCards.
+
+	shipNames := #( 'Player 1' ).
+
+	aGame := Game
+		         gamePlayedBy: shipNames
+		         on: aBoard
+		         toPlayFor: 3
+		         drawingFrom: aDeckOfCards.
+
+	aGame throw: 'Reversal Card' from: 'Player 1' toSquareAt: 10.
+	aGame play.
+
+	self assert: (aGame positionOf: 'Player 1') equals: 3.
+	self assert: (aGame lapCountOf: 'Player 1') equals: 1
+]

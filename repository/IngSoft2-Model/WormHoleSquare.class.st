@@ -41,10 +41,8 @@ WormHoleSquare class >> withEntranceAt: anEntrancePosition andExitAt: anExitPosi
 { #category : 'actions' }
 WormHoleSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: aShipManager [
 
-	| currentPosition distance isReverted |
+	| currentPosition |
 	currentPosition := aShip boardPosition.
-	distance := exitPosition - entrancePosition.
-	isReverted := aShipManager isSquareRevertedAt: currentPosition.
 
 	currentPosition = entrancePosition
 		ifTrue: [ self applyEntranceEffectFor: aShip on: aBoard managedBy: aShipManager ]
@@ -60,15 +58,14 @@ WormHoleSquare >> applyEntranceEffectFor: aShip on: aBoard managedBy: aShipManag
 	isReverted := aShipManager isSquareRevertedAt: entrancePosition.
 	distance := exitPosition - entrancePosition.
 
-	(aShipManager isSquareRevertedAt: entrancePosition)
-		ifTrue: [ 
+	isReverted
+		ifTrue: [
 			aShip lapCount = 0
 				ifTrue: [ aShip goToFirstSquare ]
-				ifFalse: [ 
+				ifFalse: [
 					aShip moveForwardBy: distance.
 					aShip moveBackwardsBy: aBoard numberOfSquares ] ]
-		ifFalse: [ 
-			aShip moveForwardBy: distance ]
+		ifFalse: [ aShip moveForwardBy: distance ]
 ]
 
 { #category : 'actions' }
@@ -80,7 +77,7 @@ WormHoleSquare >> applyExitEffectFor: aShip on: aBoard managedBy: aShipManager [
 
 	aShip moveBackwardsBy: distance.
 
-	isReverted ifTrue: [ aShip moveForwardBy: aBoard size ] "Esto seguramente sea -> un atributo size"
+	isReverted ifTrue: [ aShip moveForwardBy: aBoard numberOfSquares ]
 ]
 
 { #category : 'accessing' }

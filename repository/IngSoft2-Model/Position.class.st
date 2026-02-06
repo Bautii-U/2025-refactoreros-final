@@ -43,9 +43,7 @@ Position >> decreaseBy: aSquareDistance [
 
 		squaresGoneBackwards = 0 ifFalse: [ newLap := lap - 1 ].
 
-		newLap <= 0 ifTrue: [
-			newLap := 0.
-			newPosition := 1 ] ].
+		newLap := newLap max: 0 ].
 
 
 	^ self class at: newPosition and: newLap and: lapLength
