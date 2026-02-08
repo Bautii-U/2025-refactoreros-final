@@ -10,7 +10,8 @@ Class {
 		'ships',
 		'board',
 		'activeCards',
-		'nextSquare'
+		'nextSquare',
+		'diceCup'
 	],
 	#category : 'IngSoft2-Model-Game',
 	#package : 'IngSoft2-Model',
@@ -59,7 +60,7 @@ Game class >> createShipsNamed: shipNames on: squareCount drawingFrom: allCards 
 ]
 
 { #category : 'initialization' }
-Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal [
+Game class >> playedBy: shipNames on: aBoard throwing: aDiceSet toPlayFor: aLapGoal [
 
 	| ships allCards |
 	self checkValidShipNames: shipNames.
@@ -79,11 +80,11 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal [
 		         on: aBoard numberOfSquares
 		         drawingFrom: allCards.
 
-	^ self new initializeWith: ships on: aBoard toPlayFor: aLapGoal
+	^ self new initializeWith: ships on: aBoard withDice: aDiceSet toPlayFor: aLapGoal
 ]
 
 { #category : 'initialization' }
-Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal drawingFrom: aDeckOfCards [
+Game class >> playedBy: shipNames on: aBoard throwing: aDiceSet toPlayFor: aLapGoal drawingFrom: aDeckOfCards [
 
 	| ships cards |
 	self checkValidShipNames: shipNames.
@@ -102,7 +103,7 @@ Game class >> gamePlayedBy: shipNames on: aBoard toPlayFor: aLapGoal drawingFrom
 				 shieldedWith: 3
 				 holding: cards) ].
 
-	^ self new initializeWith: ships on: aBoard toPlayFor: aLapGoal
+	^ self new initializeWith: ships on: aBoard withDice: aDiceSet toPlayFor: aLapGoal
 ]
 
 { #category : 'actions' }
@@ -178,13 +179,14 @@ Game >> checkIfAllowedToPlay: aShip [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWith: aSetOfships on: aBoard toPlayFor: aNumberOfLaps [
+Game >> initializeWith: aSetOfships on: aBoard withDice: aDiceSet toPlayFor: aNumberOfLaps [
 
 	ships := aSetOfships deepCopy.
 	lapsGoal := aNumberOfLaps.
 	activeCards := OrderedCollection new.
-	shipManager := ShipManager withShips: ships andActiveCards: activeCards.
-	board := aBoard.	
+	diceCup := DiceCup withAll: aDiceSet.
+	shipManager := ShipManager withShips: ships activeCards: activeCards andDiceCup: diceCup.
+	board := aBoard.
 	nextSquare := EmptySquare new.
 
 ]
@@ -207,14 +209,16 @@ Game >> lapCountOf: aShipName [
 { #category : 'actions' }
 Game >> play [
 
-	| diceOutcome aShip |
+	| diceOutcome aShip extraCardPoints totalMove |
 	self checkForActiveGame.
 	aShip := ships addLast: ships removeFirst.
 	self checkIfAllowedToPlay: aShip.
 	
-	diceOutcome := board rollDiceFor: aShip with: activeCards.
+	diceOutcome := diceCup roll.
+	extraCardPoints := shipManager calculateCardModifiersFor: aShip.
+	totalMove := diceOutcome + extraCardPoints.
 
-	shipManager moveShip: aShip to: diceOutcome.
+	shipManager moveShip: aShip to: totalMove.
 	nextSquare := board squareAt: aShip boardPosition.
 	shipManager landShip: aShip atSquare: nextSquare on: board
 ]

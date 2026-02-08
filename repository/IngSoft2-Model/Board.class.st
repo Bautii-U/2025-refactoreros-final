@@ -7,20 +7,12 @@ Class {
 	#instVars : [
 		'squares',
 		'parsecs',
-		'dice',
 		'deck'
 	],
 	#category : 'IngSoft2-Model-Game',
 	#package : 'IngSoft2-Model',
 	#tag : 'Game'
 }
-
-{ #category : 'validation' }
-Board class >> checkValidDice: aDiceCollection [
-
-	aDiceCollection isNotEmpty ifFalse: [
-		Error signal: 'At least one die is required' ]
-]
 
 { #category : 'validation' }
 Board class >> checkValidSquareCount: aSquareCount [
@@ -30,42 +22,34 @@ Board class >> checkValidSquareCount: aSquareCount [
 ]
 
 { #category : 'instance creation' }
-Board class >> populatedBy: aSquareGenerator anAmountOf: aNumberOfSquares withTotalDistanceOf: aDistance toBePlayedOnRolling: aDiceSet [
+Board class >> populatedBy: aSquareGenerator anAmountOf: aNumberOfSquares withTotalDistanceOf: aDistance [
 
 	| aSetOfSquares |
 	aSetOfSquares := aSquareGenerator createSquares: aNumberOfSquares.
 
-	self checkValidDice: aDiceSet.
 	self checkValidSquareCount: aNumberOfSquares.
 
 	^ self new
 		  initializePopulatedOf: aSetOfSquares
 		  withDistanceOf: aDistance toParsecs
-		  toBePlayedOnRolling: aDiceSet
 		  withDeck: OrderedCollection new
 ]
 
 { #category : 'instance creation' }
-Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance toBePlayedOnRolling: aDiceSet [
-
-	self checkValidDice: aDiceSet.
+Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance [
 
 	^ self new
 		  initializePopulatedOf: aSetOfSquares
 		  withDistanceOf: aDistance toParsecs
-		  toBePlayedOnRolling: aDiceSet
 		  withDeck: OrderedCollection new
 ]
 
 { #category : 'instance creation' }
-Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance toBePlayedOnRolling: aDiceSet withDeck: aCollectionOfCards [
-
-	self checkValidDice: aDiceSet.
+Board class >> populatedOf: aSetOfSquares withTotalDistanceOf: aDistance withDeck: aCollectionOfCards [
 
 	^ self new
 		  initializePopulatedOf: aSetOfSquares
 		  withDistanceOf: aDistance toParsecs
-		  toBePlayedOnRolling: aDiceSet
 		  withDeck: aCollectionOfCards
 ]
 
@@ -84,11 +68,10 @@ Board >> giveRandomCardTo: aShip [
 ]
 
 { #category : 'initialization' }
-Board >> initializePopulatedOf: aSetOfSquares withDistanceOf: aNumberOfParsecs toBePlayedOnRolling: aDiceSet withDeck: aCollectionOfCards [
+Board >> initializePopulatedOf: aSetOfSquares withDistanceOf: aNumberOfParsecs withDeck: aCollectionOfCards [
 
 	squares := aSetOfSquares deepCopy.
 	parsecs := aNumberOfParsecs.
-	dice := aDiceSet.
 	deck := aCollectionOfCards
 ]
 
@@ -102,20 +85,6 @@ Board >> numberOfSquares [
 Board >> parsecsPerSquare [
 
 	^ parsecs / squares size
-]
-
-{ #category : 'actions' }
-Board >> rollDiceFor: aShip with: activeCards [
-
-	| extraPointsForThrow diceResult |
-	diceResult := (dice collect: [ :die | die roll ]) sum.
-
-	extraPointsForThrow := 0.
-	activeCards do: [ :aCard |
-		extraPointsForThrow := extraPointsForThrow
-		                       + (aCard applyThrowEffectFor: aShip) ].
-
-	^ diceResult + extraPointsForThrow
 ]
 
 { #category : 'accessing' }
