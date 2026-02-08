@@ -2723,7 +2723,7 @@ GameTest >> testD19ReversalCardCanBeCancelledRestoringSquareToNormal [
 ]
 
 { #category : 'tests' }
-GameTest >> testD20WhenReversalCardTriesToInvertANegativeSquareIndexItFails [
+GameTest >> testD20WhenReversalCardTriesToInvertAnInvalidSquareIndexItFails [
 
 	| aGame dice shipNames aBoard aDeckOfCards squareGenerator aBoardSize |
 	aBoardSize := 10.

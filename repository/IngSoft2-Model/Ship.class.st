@@ -70,12 +70,6 @@ Ship >> hasGreaterPosition: anotherShip [
 ]
 
 { #category : 'testing' }
-Ship >> hasNoShields [
-
-	^ shields = 0
-]
-
-{ #category : 'testing' }
 Ship >> hasReachedLap: lapsGoal [
 
 	^ position lap = lapsGoal

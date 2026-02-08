@@ -31,7 +31,7 @@ ShipManager >> applyBattleLossTo: aShip [
 		                  ifNone: [ aShip ].
 	affectedShip := damageReceiver breakAShield.
 	
-	affectedShip hasNoShields ifFalse: [ ^ self ].
+	affectedShip hasShields ifTrue: [ ^ self ].
 	affectedShip goToFirstSquare.
 	shipTurnSkips at: affectedShip put: 2
 ]
@@ -79,7 +79,6 @@ ShipManager >> checkBattles: aShip on: aBoard [
 			loserShipWithMercenaries do: [ :ship | self applyBattleLossTo: ship ].
 			loserShip goToFirstSquare.
 			loserShip hasShields ifFalse: [ shipTurnSkips at: loserShip put: 2 ] ] ]
-
 ]
 
 { #category : 'checking' }
