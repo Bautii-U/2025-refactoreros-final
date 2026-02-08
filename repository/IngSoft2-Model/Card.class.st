@@ -14,28 +14,27 @@ Class {
 }
 
 { #category : 'instance creation' }
-Card class >> accelerationWithoutOwner [
+Card class >> acceleration [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
+		  initializeOwnedBy: nil
 		  causing: (AccelerationEffect ofValue: 1)
 ]
 
 { #category : 'instance creation' }
-Card class >> cancellationWithoutOwner [
+Card class >> cancellation [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
-		  causing:
-		  (CancellationEffect targetTo: NullShip new whoPlayed: '')
+		  initializeOwnedBy: nil
+		  causing: (CancellationEffect targetTo: nil whoPlayed: '')
 ]
 
 { #category : 'instance creation' }
-Card class >> mercenaryWithoutOwner [
+Card class >> mercenary [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
-		  causing: (MercenaryEffect targetedTo: NullShip new)
+		  initializeOwnedBy: nil
+		  causing: (MercenaryEffect targetedTo: nil)
 ]
 
 { #category : 'instance creation' }
@@ -45,42 +44,42 @@ Card class >> ownedBy: aShip causing: anEffect [
 ]
 
 { #category : 'instance creation' }
-Card class >> protectorWithoutOwner [
+Card class >> protector [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
-		  causing: (ProtectorEffect targetedTo: NullShip new)
+		  initializeOwnedBy: nil
+		  causing: (ProtectorEffect targetedTo: nil)
 ]
 
 { #category : 'instance creation' }
-Card class >> redoWithoutOwner [
+Card class >> redo [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
+		  initializeOwnedBy: nil
 		  causing: (RedoEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
-Card class >> repeatWithoutOwner [
+Card class >> repeat [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
+		  initializeOwnedBy: nil
 		  causing: (RepeatEffect targetedTo: NullShip new)
 ]
 
 { #category : 'instance creation' }
-Card class >> reversalWithoutOwner [
+Card class >> reversal [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
+		  initializeOwnedBy: nil
 		  causing: (ReversalEffect targetedTo: 0)
 ]
 
 { #category : 'instance creation' }
-Card class >> speedWithoutOwner [
+Card class >> speed [
 
 	^ self new
-		  initializeOwnedBy: NullShip new
+		  initializeOwnedBy: nil
 		  causing: (SpeedEffect ofValue: 1 targetedTo: NullShip new)
 ]
 
@@ -186,7 +185,7 @@ Card >> isReversalActiveAt: aSquareIndex [
 { #category : 'actions' }
 Card >> playedBy: aShip [
 
-    ^ self class ownedBy: aShip causing: effect.
+	^ self class ownedBy: aShip causing: effect
 ]
 
 { #category : 'actions' }

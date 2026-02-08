@@ -1,3 +1,6 @@
+"
+Represents a container for a collection of dice. It is responsible for rolling them and returning the summed result.
+"
 Class {
 	#name : 'DiceCup',
 	#superclass : 'Object',

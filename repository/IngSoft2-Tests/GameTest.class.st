@@ -723,7 +723,7 @@ GameTest >> testC021WhenShipLandsOnDrawCardSquareAndObtainsOnlyTheBoardAvailable
 		                 DrawCardSquare new.
 		                 EmptySquare new } asOrderedCollection.
 		
-	aDeckOfCards := { Card speedWithoutOwner }.
+	aDeckOfCards := { Card speed }.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -753,12 +753,12 @@ GameTest >> testC02WhenShipLandsOnDrawCardSquareAndObtainsANewCardThenValid [
 		                 EmptySquare new } asOrderedCollection.
 		
 	aDeckOfCards := {
-		            Card speedWithoutOwner.
-		            Card mercenaryWithoutOwner.
-		            Card accelerationWithoutOwner.
-		            Card cancellationWithoutOwner.
-		            Card redoWithoutOwner.
-		            Card repeatWithoutOwner }.
+		            Card speed.
+		            Card mercenary.
+		            Card acceleration.
+		            Card cancellation.
+		            Card redo.
+		            Card repeat }.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -788,12 +788,12 @@ GameTest >> testC03WhenAShipPlaysAccelerationCardAndAllShipsIncrementTheirDiceRo
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner } asOrderedCollection.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -826,8 +826,8 @@ GameTest >> testC04WhenShipPlaysACardThatDoesNotHaveInHandThenItFails [
 	shipNames := #( 'Player 1' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -856,12 +856,12 @@ GameTest >> testC05WhenAShipPlaysAPermanentCardOutOfItsTurnItFails [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card accelerationWithoutOwner } asOrderedCollection.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration.
+		                Card acceleration } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -891,12 +891,12 @@ GameTest >> testC06WhenAShipPlaysSpeedCardThenMovementIsIncremented [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -929,10 +929,10 @@ GameTest >> testC07WhenACancellationCardIsPlayedAndThePermanentCardIsDeactivated
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -964,10 +964,10 @@ GameTest >> testC08WhenACancellationCardIsPlayedAndTheTargetCardIsNotActiveItFai
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1005,10 +1005,10 @@ GameTest >> testC09WhenACancellationCardTargetsANonPermanentCardItFails [
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1046,10 +1046,10 @@ GameTest >> testC10WhenARedoCardRecreatesAPermanentCardEffectThenValid [
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card accelerationWithoutOwner .
-		                Card accelerationWithoutOwner.
-		                Card redoWithoutOwner .
-		                Card redoWithoutOwner } asOrderedCollection.
+		                Card acceleration .
+		                Card acceleration.
+		                Card redo .
+		                Card redo } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1081,8 +1081,8 @@ GameTest >> testC11WhenARedoCardIsPlayedWithoutACardPlayedPreviouslyItFails [
 	shipNames := #( 'Player 1' ).
 
 	aDeckOfCards := {
-		                Card redoWithoutOwner .
-		                Card redoWithoutOwner } asOrderedCollection.
+		                Card redo .
+		                Card redo } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1111,12 +1111,12 @@ GameTest >> testC12WhenARedoCardIsPlayedByAShipAndItActivatesForAnotherPlayerThe
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card redo.
+		                Card redo.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1150,12 +1150,12 @@ GameTest >> testC13WhenRedoCardIsPlayedByAShipAfterAPermanentCardAndItsNotTheTur
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card redo.
+		                Card redo.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1189,12 +1189,12 @@ GameTest >> testC14WhenARedoCardRecreatesAnInstantaneousCardEffectThenValid [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card redoWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation.
+		                Card redo.
+		                Card redo } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1290,10 +1290,10 @@ GameTest >> testC16WhenAShipPlaysRepeatCardTargetedToItselfAndTheEffectOfTheLast
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card repeatWithoutOwner.
-		                Card repeatWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card repeat.
+		                Card repeat.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1334,10 +1334,10 @@ GameTest >> testC17WhenAShipPlaysRepeatCardTargetedToOtherShipAndTheEffectOfTheL
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card repeatWithoutOwner .
-		                Card repeatWithoutOwner.
-		                Card speedWithoutOwner .
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card repeat .
+		                Card repeat.
+		                Card speed .
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1372,10 +1372,10 @@ GameTest >> testC18WhenAShipPlaysRepeatCardOnAnEmptySquareAndTheCardHasNoEffectT
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card repeatWithoutOwner.
-		                Card repeatWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card repeat.
+		                Card repeat.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1408,10 +1408,10 @@ GameTest >> testC19WhenARepeatCardIsPlayedBeforeAnyDiceAreRolledAndTheCardHasNoE
 	shipNames := #( 'Player 1' ).
 
 	aDeckOfCards := {
-		                Card repeatWithoutOwner.
-		                Card repeatWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card repeat.
+		                Card repeat.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1440,12 +1440,12 @@ GameTest >> testC20WhenAMercenaryCardIsPlayedAndTheMercenaryHelpsTheShipInBattle
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1479,10 +1479,10 @@ GameTest >> testC21WhenAShipLandsOnTheSameSquareAsItsMercenaryAndDontBattleThenV
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card speed.
+		                Card mercenary.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1514,10 +1514,10 @@ GameTest >> testC22WhenAMercenaryLandsOnTheSameSquareAsItsHirererAndDontBattleTh
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner .
-		                Card speedWithoutOwner .
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card mercenary .
+		                Card speed .
+		                Card mercenary.
+		                Card speed } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1548,12 +1548,12 @@ GameTest >> testC23WhenAMercenaryBattlesAndTheHirererDoesNotHelpThenValid [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1586,14 +1586,14 @@ GameTest >> testC24WhenAShipHiresMoreThanOneMercenaryAndTheyHelpInBattleThenVali
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card mercenary.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1628,14 +1628,14 @@ GameTest >> testC25WhenAShipWithMercenariesLosesABattleThenTheyAllBreakAShield [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card mercenary.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1671,12 +1671,12 @@ GameTest >> testC26WhenAShipHiresAMercenaryAndItHasAlreadyBeenHiredItFails [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card mercenaryWithoutOwner.
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner }
+		                Card mercenary.
+		                Card mercenary.
+		                Card mercenary.
+		                Card speed.
+		                Card speed.
+		                Card speed }
 		                asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
@@ -1740,12 +1740,12 @@ GameTest >> testC28WhenShipsBattleAndAPlayedAccelerationCardIncreasesTheDiceThro
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card accelerationWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card mercenary.
+		                Card acceleration.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1788,10 +1788,10 @@ GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardThenLastSquareGetsRetrig
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card repeatWithoutOwner.
-		                Card repeatWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card repeat.
+		                Card repeat.
+		                Card redo.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1824,10 +1824,10 @@ GameTest >> testC30WhenACancellationCardIsPlayedAndTheAccelerationCardIsDeactiva
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card accelerationWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card acceleration.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1859,10 +1859,10 @@ GameTest >> testC31WhenACancellationCardIsPlayedForAMercenaryThenTheMercenaryNoL
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card cancellationWithoutOwner } asOrderedCollection.
+		                Card mercenary.
+		                Card speed.
+		                Card cancellation.
+		                Card cancellation } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1894,14 +1894,14 @@ GameTest >> testC32WhenAShipPlaysRedoCardAfterAMercenaryCardThenTwoShipsHelpInBa
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                Card mercenaryWithoutOwner.
-		                Card redoWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card mercenary.
+		                Card redo.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 	aGame := Game
 		         playedBy: shipNames
 		         on: aBoard
@@ -1934,12 +1934,12 @@ GameTest >> testD01WhenAShipLosesABattleAndItsProtectorBreakAShieldThenValid [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -1973,12 +1973,12 @@ GameTest >> testD02WhenAProtectedShipLosesABattleThenItGoesToStartAndProtectorSt
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2011,12 +2011,12 @@ GameTest >> testD03WhenProtectorHasNoShieldsThenTheOwnerTakesTheDamage [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2053,12 +2053,12 @@ GameTest >> testD04WhenProtectorLastShieldIsBrokenForAHirererBattleThenGoesToSta
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2095,10 +2095,10 @@ GameTest >> testD05AShipCanBattleAgainstItsProtector [
 	shipNames := #( 'Player 1' 'Player 2' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2130,14 +2130,14 @@ GameTest >> testD06AShipCanHaveMultipleProtectorsAndAllProtectItsShield [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2178,14 +2178,14 @@ GameTest >> testD07AShipCanProtectMultiplyShipsSimultaneously [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' 'Player 4' ).
 
 	aDeckOfCards := {
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card speed.
+		                Card speed.
+		                Card protector.
+		                Card protector.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2221,12 +2221,12 @@ GameTest >> testD08ProtectorCardCanBeCancelledLeavingOwnerVulnerable [
 	shipNames := #( 'Player 1' 'Player 2' 'Player 3' ).
 
 	aDeckOfCards := {
-		                Card protectorWithoutOwner.
-		                Card protectorWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card protector.
+		                Card protector.
+		                Card speed.
+		                Card speed.
+		                Card cancellation.
+		                Card speed } asOrderedCollection.
 
 	aGame := Game
 		         playedBy: shipNames
@@ -2260,10 +2260,10 @@ GameTest >> testD09ReversalCardInvertMoonWalkSquareEffect [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2300,10 +2300,10 @@ GameTest >> testD10ReversalCardInvertBlackHoleEffect [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2343,10 +2343,10 @@ GameTest >> testD11ReversalCardInvertHyperSpaceJumpEffect [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2384,12 +2384,12 @@ GameTest >> testD12ReversalCardInvertHyperJumpEffect [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2428,8 +2428,8 @@ GameTest >> testD13ReversalCardMakesDrawCardSquareDiscardInsteadOfPickUp [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2465,10 +2465,10 @@ GameTest >> testD14ReversalCardHasNoEffectOnAtomicBombSquare [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2506,8 +2506,8 @@ GameTest >> testD15ReversalCardHasNoEffectOnEmptySquare [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2551,8 +2551,8 @@ GameTest >> testD16ReversalCardOnWormHoleEntryAtFirstLapSendsShipToStart [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2593,8 +2593,8 @@ GameTest >> testD17ReversalCardOnWormHoleEntryAtSecondLapSendsShipToPreviousLapE
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2637,8 +2637,8 @@ GameTest >> testD18ReversalCardOnWormHoleExitSendsShipToNextLapEntrance [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2672,11 +2672,11 @@ GameTest >> testD19ReversalCardCanBeCancelledRestoringSquareToNormal [
 		                 EmptySquare new } asOrderedCollection.
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card cancellationWithoutOwner.
-		                Card speedWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed.
+		                Card cancellation.
+		                Card speed.
+		                Card speed } asOrderedCollection.
 
 	aBoard := Board
 		          populatedOf: aSetOfSquares
@@ -2712,8 +2712,8 @@ GameTest >> testD20WhenReversalCardTriesToInvertAnInvalidSquareIndexItFails [
 		          withTotalDistanceOf: (Parsec amount: 50).
 
 	aDeckOfCards := {
-		                Card reversalWithoutOwner.
-		                Card speedWithoutOwner } asOrderedCollection.
+		                Card reversal.
+		                Card speed } asOrderedCollection.
 
 	shipNames := #( 'Player 1' ).
 

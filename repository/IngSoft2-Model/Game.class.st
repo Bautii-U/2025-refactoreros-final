@@ -67,13 +67,13 @@ Game class >> playedBy: shipNames on: aBoard throwing: aDiceSet toPlayFor: aLapG
 	self checkValidLapCount: aLapGoal.
 
 	allCards := {
-		            Card speedWithoutOwner.
-		            Card mercenaryWithoutOwner.
-		            Card accelerationWithoutOwner.
-		            Card cancellationWithoutOwner.
-		            Card redoWithoutOwner.
-		            Card repeatWithoutOwner.
-		            Card protectorWithoutOwner }.
+		            Card speed.
+		            Card mercenary.
+		            Card acceleration.
+		            Card cancellation.
+		            Card redo.
+		            Card repeat.
+		            Card protector }.
 
 	ships := self
 		         createShipsNamed: shipNames
