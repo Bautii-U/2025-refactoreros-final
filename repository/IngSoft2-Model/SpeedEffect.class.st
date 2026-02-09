@@ -8,9 +8,9 @@ Class {
 		'targetShip',
 		'speedValue'
 	],
-	#category : 'IngSoft2-Model-CardEffect',
+	#category : 'IngSoft2-Model-Cards',
 	#package : 'IngSoft2-Model',
-	#tag : 'CardEffect'
+	#tag : 'Cards'
 }
 
 { #category : 'instance creation' }
@@ -23,6 +23,7 @@ SpeedEffect class >> ofValue: aSpeedValue targetedTo: aTarget [
 SpeedEffect >> applyThrowEffectFor: aShip [
 
 	aShip = targetShip ifTrue: [ ^ 1 ].
+	
 	^ 0
 ]
 

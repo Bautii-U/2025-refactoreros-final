@@ -8,9 +8,9 @@ Class {
 		'targetShip',
 		'targetCardName'
 	],
-	#category : 'IngSoft2-Model-CardEffect',
+	#category : 'IngSoft2-Model-Cards',
 	#package : 'IngSoft2-Model',
-	#tag : 'CardEffect'
+	#tag : 'Cards'
 }
 
 { #category : 'instance creation' }

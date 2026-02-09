@@ -8,9 +8,9 @@ Class {
 		'owner',
 		'effect'
 	],
-	#category : 'IngSoft2-Model-Card',
+	#category : 'IngSoft2-Model-Cards',
 	#package : 'IngSoft2-Model',
-	#tag : 'Card'
+	#tag : 'Cards'
 }
 
 { #category : 'instance creation' }

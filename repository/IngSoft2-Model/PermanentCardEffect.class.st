@@ -4,9 +4,9 @@ Abstract subclass for effects that persist in the game or modify the ship's stat
 Class {
 	#name : 'PermanentCardEffect',
 	#superclass : 'CardEffect',
-	#category : 'IngSoft2-Model-CardEffect',
+	#category : 'IngSoft2-Model-Cards',
 	#package : 'IngSoft2-Model',
-	#tag : 'CardEffect'
+	#tag : 'Cards'
 }
 
 { #category : 'checking' }

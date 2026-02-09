@@ -359,7 +359,9 @@ GameTest >> testB06WhenAShipLandsOnAtomicBombAndAllShipsGoBackToFirstSquareThenV
 	aGame play.
 	aGame play.
 
-	self assert: (aGame positionOf: 'Player 1') equals: 1
+	self assert: (aGame positionOf: 'Player 1') equals: 1.
+	self assert: (aGame positionOf: 'Player 2') equals: 1.
+	self assert: (aGame positionOf: 'Player 3') equals: 1
 ]
 
 { #category : 'tests' }
@@ -387,7 +389,9 @@ GameTest >> testB07WhenAShipLandsOnAtomicBombAndAllShipsLoseAShieldThenValid [
 	aGame play.
 	aGame play.
 
-	self assert: (aGame shieldfOf: 'Player 1') equals: 2
+	self assert: (aGame shieldfOf: 'Player 1') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 2') equals: 2.
+	self assert: (aGame shieldfOf: 'Player 3') equals: 2
 ]
 
 { #category : 'tests' }
