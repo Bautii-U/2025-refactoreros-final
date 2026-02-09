@@ -64,6 +64,7 @@ Board >> giveRandomCardTo: aShip [
 
 	| card |
 	card := deck atRandom deepCopy.
+	
 	aShip drawCard: card
 ]
 

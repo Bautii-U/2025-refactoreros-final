@@ -23,6 +23,7 @@ Die >> initializeWithFaces: aNumberOfFaces [
 
 	(aNumberOfFaces isInteger and: [ aNumberOfFaces > 0 ]) ifFalse: [
 		self error: 'Invalid number of faces' ].
+	
 	faces := aNumberOfFaces
 ]
 

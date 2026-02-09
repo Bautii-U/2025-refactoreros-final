@@ -44,18 +44,22 @@ ShipManager >> battle: aShipWithMercenaries with: anotherShipWithMercenaries on:
 	| rollA rollB loserShip |
 	rollA := 0.
 	aShipWithMercenaries do: [ :aShip |
-		rollA := rollA + diceCup roll + (self calculateCardModifiersFor: aShip) ].
+		rollA := rollA + diceCup roll
+		         + (self calculateCardModifiersFor: aShip) ].
 	rollB := 0.
 	anotherShipWithMercenaries do: [ :aShip |
-		rollB := rollB + diceCup roll + (self calculateCardModifiersFor: aShip) ].
+		rollB := rollB + diceCup roll
+		         + (self calculateCardModifiersFor: aShip) ].
 
 	[ rollA = rollB ] whileTrue: [
 		rollA := 0.
 		aShipWithMercenaries do: [ :aShip |
-			rollA := rollA + diceCup roll + (self calculateCardModifiersFor: aShip) ].
+			rollA := rollA + diceCup roll
+			         + (self calculateCardModifiersFor: aShip) ].
 		rollB := 0.
 		anotherShipWithMercenaries do: [ :aShip |
-			rollB := rollB + diceCup roll + (self calculateCardModifiersFor: aShip) ] ].
+			rollB := rollB + diceCup roll
+			         + (self calculateCardModifiersFor: aShip) ] ].
 
 	loserShip := aShipWithMercenaries at: 1.
 	rollA > rollB ifTrue: [
@@ -98,6 +102,7 @@ ShipManager >> checkIfShouldFight: aShip with: anotherShip [
 
 	| anotherShipWithMercenaries |
 	anotherShipWithMercenaries := self getMercenariesOf: anotherShip.
+	
 	^ (anotherShip isAtTheSameSquareAs: aShip) and:
 		  (anotherShipWithMercenaries includes: aShip) not
 ]
@@ -108,6 +113,7 @@ ShipManager >> getMercenariesOf: aShip [
 	| shipWithMercenaries |
 	shipWithMercenaries := OrderedCollection new.
 	shipWithMercenaries add: aShip.
+	
 	activeCards do: [ :aCard |
 		aCard applyMercenaryEffectFor: aShip in: shipWithMercenaries ].
 

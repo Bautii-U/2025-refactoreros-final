@@ -15,15 +15,15 @@ Class {
 }
 
 { #category : 'accessing' }
-Position class >> at: aPosition and: aLap and: aLapLegth [
+Position class >> at: aPosition lap: aLap andLapLength: aLapLength [
 
-	^ self new initializeWith: aPosition and: aLap and: aLapLegth
+	^ self new initializeWith: aPosition and: aLap and: aLapLength
 ]
 
 { #category : 'accessing' }
-Position class >> atStartOfLapWithSquareNumbers: aLapLegth [
+Position class >> atStartOfLapWithSquareNumbers: aLapLength [
 
-	^ self new initializeWith: 1 and: 0 and: aLapLegth
+	^ self new initializeWith: 1 and: 0 and: aLapLength
 ]
 
 { #category : 'arithmetic' }
@@ -45,8 +45,7 @@ Position >> decreaseBy: aSquareDistance [
 
 		newLap := newLap max: 0 ].
 
-
-	^ self class at: newPosition and: newLap and: lapLength
+	^ self class at: newPosition lap: newLap andLapLength: lapLength
 ]
 
 { #category : 'actions' }
@@ -55,7 +54,7 @@ Position >> goToStartOfLap [
 	| newPosition |
 	newPosition := 1.
 
-	^ self class at: newPosition and: lap and: lapLength
+	^ self class at: newPosition lap: lap andLapLength: lapLength
 ]
 
 { #category : 'comparing' }
@@ -71,7 +70,7 @@ Position >> increaseBy: aSquareDistance [
 	newPosition := aSquareDistance + square - 1 % lapLength + 1.
 	newLap := lap + (aSquareDistance + square - 1 // lapLength).
 
-	^ self class at: newPosition and: newLap and: lapLength
+	^ self class at: newPosition lap: newLap andLapLength: lapLength
 ]
 
 { #category : 'initialization' }

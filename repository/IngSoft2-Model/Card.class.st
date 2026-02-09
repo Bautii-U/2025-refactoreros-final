@@ -56,7 +56,7 @@ Card class >> redo [
 
 	^ self new
 		  initializeOwnedBy: nil
-		  causing: (RedoEffect targetedTo: NullShip new)
+		  causing: (RedoEffect targetedTo: nil)
 ]
 
 { #category : 'instance creation' }
@@ -64,7 +64,7 @@ Card class >> repeat [
 
 	^ self new
 		  initializeOwnedBy: nil
-		  causing: (RepeatEffect targetedTo: NullShip new)
+		  causing: (RepeatEffect targetedTo: nil)
 ]
 
 { #category : 'instance creation' }
@@ -80,7 +80,7 @@ Card class >> speed [
 
 	^ self new
 		  initializeOwnedBy: nil
-		  causing: (SpeedEffect ofValue: 1 targetedTo: NullShip new)
+		  causing: (SpeedEffect ofValue: 1 targetedTo: nil)
 ]
 
 { #category : 'actions' }
@@ -95,7 +95,7 @@ Card >> applyMercenaryEffectFor: aShip in: shipWithMercenaries [
 { #category : 'actions' }
 Card >> applyOnPlayed: aGame [
 
-	effect applyPlayedEffectIn: aGame from: owner to: NullShip new
+	effect applyPlayedEffectIn: aGame from: owner to: nil
 ]
 
 { #category : 'actions' }

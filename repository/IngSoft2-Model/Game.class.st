@@ -116,6 +116,7 @@ Game >> applyCancellationTo: aTargetShip whoPlayed: aTargetCardName [
 
 	cardToBeCancelled := activeCards detect: [ :aCard |
 		                     aCard is: aTargetCardName ownedBy: aTargetShip ].
+	
 	activeCards remove: cardToBeCancelled
 ]
 
@@ -156,6 +157,7 @@ Game >> cardsInHandOf: aShipName [
 Game >> checkForActiveGame [
 
 	self isGameFinished ifTrue: [ Error signal: 'The game has finished' ].
+	
 	^ true
 ]
 
