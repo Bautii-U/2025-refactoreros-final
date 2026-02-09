@@ -30,7 +30,7 @@ AccelerationEffect >> initializeWith: anAccelerationValue [
 	accelerationValue := anAccelerationValue
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 AccelerationEffect >> isCalled: aName [
 
 	^ 'Acceleration Card' = aName

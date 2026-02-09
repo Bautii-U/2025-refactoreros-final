@@ -5,7 +5,7 @@ Class {
 	#name : 'MoonWalkSquare',
 	#superclass : 'Object',
 	#instVars : [
-		'backwardsPush'
+		'push'
 	],
 	#category : 'IngSoft2-Model-SquareType',
 	#package : 'IngSoft2-Model',
@@ -13,19 +13,19 @@ Class {
 }
 
 { #category : 'actions' }
-MoonWalkSquare class >> checkValidBackwardsPushNumber: squaresToPushBackwards [
+MoonWalkSquare class >> checkValidPushNumber: squaresToPush [
 
-	squaresToPushBackwards >= 1 ifFalse: [
+	squaresToPush >= 1 ifFalse: [
 		Error signal:
-			'Squares to push backwards must be equal or higher than 1' ]
+			'Squares to push must be equal or higher than 1' ]
 ]
 
 { #category : 'accessing' }
-MoonWalkSquare class >> withBackwardsPush: aNumberOfSquares [
+MoonWalkSquare class >> withPush: aNumberOfSquares [
 
-	self checkValidBackwardsPushNumber: aNumberOfSquares.
+	self checkValidPushNumber: aNumberOfSquares.
 
-	^ self new initializeWithBackwardsPush: aNumberOfSquares
+	^ self new initializeWithPush: aNumberOfSquares
 ]
 
 { #category : 'actions' }
@@ -45,18 +45,18 @@ MoonWalkSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: a
 MoonWalkSquare >> applyNormalEffectTo: shipList forShip: aShip [
 
 	shipList do: [ :ship |
-		ship = aShip ifFalse: [ ship moveBackwardsBy: backwardsPush ] ]
+		ship = aShip ifFalse: [ ship moveBackwardsBy: push ] ]
 ]
 
 { #category : 'actions' }
 MoonWalkSquare >> applyReversalEffectTo: shipList for: aShip [
 
 	shipList do: [ :ship |
-		ship = aShip ifFalse: [ ship moveForwardBy: backwardsPush ] ]
+		ship = aShip ifFalse: [ ship moveForwardBy: push ] ]
 ]
 
 { #category : 'accessing' }
-MoonWalkSquare >> initializeWithBackwardsPush: aNumberOfSquares [
+MoonWalkSquare >> initializeWithPush: aNumberOfSquares [
 
-	backwardsPush := aNumberOfSquares
+	push := aNumberOfSquares
 ]

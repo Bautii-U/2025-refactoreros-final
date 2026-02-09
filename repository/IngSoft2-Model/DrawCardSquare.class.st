@@ -16,8 +16,20 @@ DrawCardSquare >> applyEffectTo: shipList forShip: aShip on: aBoard managedBy: a
 	isReverted := aShipManager isSquareRevertedAt: aShip boardPosition.
 
 	isReverted
-		ifTrue: [ aBoard discardRandomCardTo: aShip ]
-		ifFalse: [ aBoard giveRandomCardTo: aShip ].
+		ifTrue: [ self applyReversalEffectTo: aShip on: aBoard ]
+		ifFalse: [ self applyNormalEffectTo: aShip on: aBoard ].
 
 	^ true
+]
+
+{ #category : 'actions' }
+DrawCardSquare >> applyNormalEffectTo: aShip on: aBoard [
+
+	aBoard giveRandomCardTo: aShip
+]
+
+{ #category : 'actions' }
+DrawCardSquare >> applyReversalEffectTo: aShip on: aBoard [
+
+	aBoard discardRandomCardTo: aShip
 ]

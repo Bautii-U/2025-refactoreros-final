@@ -480,7 +480,7 @@ GameTest >> testB11WhenAShipLandsOnMoonWalkAndShipStaysInPositionButOtherShipsGo
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new.
-		                 (MoonWalkSquare withBackwardsPush: 2).
+		                 (MoonWalkSquare withPush: 2).
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new } asOrderedCollection.
@@ -1274,7 +1274,7 @@ GameTest >> testC16WhenAShipPlaysRepeatCardTargetedToItselfAndTheEffectOfTheLast
 	aSetOfSquares := {
 		                 EmptySquare new.
 		                 EmptySquare new.
-		                 (MoonWalkSquare withBackwardsPush: 4).
+		                 (MoonWalkSquare withPush: 4).
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new.
@@ -1318,7 +1318,7 @@ GameTest >> testC17WhenAShipPlaysRepeatCardTargetedToOtherShipAndTheEffectOfTheL
 	aSetOfSquares := {
 		                 EmptySquare new.
 		                 EmptySquare new.
-		                 (MoonWalkSquare withBackwardsPush: 1).
+		                 (MoonWalkSquare withPush: 1).
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new.
@@ -1772,7 +1772,7 @@ GameTest >> testC29WhenARedoCardIsPlayedAfterARepeatCardThenLastSquareGetsRetrig
 	aSetOfSquares := {
 		                 EmptySquare new.
 		                 EmptySquare new.
-		                 (MoonWalkSquare withBackwardsPush: 2).
+		                 (MoonWalkSquare withPush: 2).
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new.
@@ -2253,7 +2253,7 @@ GameTest >> testD09ReversalCardInvertMoonWalkSquareEffect [
 	dice := { LoadedDie withSetNumbers: #( 1 ) } asOrderedCollection.
 	aSetOfSquares := {
 		                 EmptySquare new.
-		                 (MoonWalkSquare withBackwardsPush: 3).
+		                 (MoonWalkSquare withPush: 3).
 		                 EmptySquare new.
 		                 EmptySquare new.
 		                 EmptySquare new.

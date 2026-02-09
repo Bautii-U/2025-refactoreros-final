@@ -16,21 +16,21 @@ HyperSpaceJumpSquare >> applyEffectTo: shipList forShip: aShip on: aBoard manage
 	isReverted := aShipManager isSquareRevertedAt: aShip boardPosition.
 
 	isReverted
-		ifTrue: [ self applyReversalEffectTo: shipList for: aShip ]
-		ifFalse: [ self applyNormalEffectTo: shipList forShip: aShip ].
+		ifTrue: [ self applyReversalEffectTo: aShip ]
+		ifFalse: [ self applyNormalEffectTo: aShip ].
 
 	^ true
 ]
 
 { #category : 'actions' }
-HyperSpaceJumpSquare >> applyNormalEffectTo: shipList forShip: aShip [
+HyperSpaceJumpSquare >> applyNormalEffectTo: aShip [
 
 	aShip moveForwardBy: 4.
 	aShip breakAShield.
 ]
 
 { #category : 'actions' }
-HyperSpaceJumpSquare >> applyReversalEffectTo: shipList for: aShip [
+HyperSpaceJumpSquare >> applyReversalEffectTo: aShip [
 
 	aShip moveBackwardsBy: 4.
 	aShip restoreAShield.

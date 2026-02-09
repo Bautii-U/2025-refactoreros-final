@@ -20,8 +20,8 @@ MoonWalkSquareTest >> should: anErrorBlock raise: errorClass withMessageText: er
 MoonWalkSquareTest >> testB03WhenAMoonWalkSquareIsCreatedWithInvalidSquaresToPushBackwardsThenFails [
 
 	self
-		should: [ MoonWalkSquare withBackwardsPush: -2 ]
+		should: [ MoonWalkSquare withPush: -2 ]
 		raise: Error
 		withMessageText:
-		'Squares to push backwards must be equal or higher than 1'
+		'Squares to push must be equal or higher than 1'
 ]

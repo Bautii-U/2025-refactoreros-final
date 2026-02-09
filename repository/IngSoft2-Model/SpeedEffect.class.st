@@ -50,7 +50,7 @@ SpeedEffect >> initializeWithSpeedValue: aSpeedValue and: aTargetShip [
 	targetShip := aTargetShip
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 SpeedEffect >> isCalled: aName [
 
 	^ 'Speed Card' = aName

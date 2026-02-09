@@ -52,6 +52,10 @@ CardEffect >> hasTarget: aShip [
 ]
 
 { #category : 'testing' }
+CardEffect >> isCalled: aName [
+]
+
+{ #category : 'testing' }
 CardEffect >> isReversalFor: aSquareIndex [
 
 	^ false

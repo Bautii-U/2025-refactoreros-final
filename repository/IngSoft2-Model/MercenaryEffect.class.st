@@ -49,7 +49,7 @@ MercenaryEffect >> initializeTargetedTo: aTargetShip [
 	targetShip := aTargetShip
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 MercenaryEffect >> isCalled: aName [
 
 	^ 'Mercenary Card' = aName
